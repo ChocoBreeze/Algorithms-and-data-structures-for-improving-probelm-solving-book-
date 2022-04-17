@@ -1,7 +1,7 @@
 // 개구리 문제
 // 링크 : https://atcoder.jp/contests/dp/tasks/dp_a
 // i번째로 가는 방법은 i-1번째에서 jump하거나 i-2번재에서 jump --> 둘 중 min
-
+// O(N)
 #include <iostream>
 #include <vector>
 using namespace std;
