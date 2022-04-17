@@ -1,15 +1,17 @@
+// Euclidean algorithm
+// m >= n > 0 ==> O(logn)
 #include <iostream>
 using namespace std;
 
 int GCD(int m, int n) {
-    // ¥Ù¡¼¥¹¥±¡¼¥¹
+    // base case
     if (n == 0) return m;
 
-    // ºÆµ¢¸Æ¤Ó½Ð¤·
+    // ìž¬ê·€ í˜¸ì¶œ
     return GCD(n, m % n);
 }
 
 int main() {
-    cout << GCD(51, 15) << endl; // 3 ¤¬½ÐÎÏ¤µ¤ì¤ë
-    cout << GCD(15, 51) << endl; // 3 ¤¬½ÐÎÏ¤µ¤ì¤ë
+    cout << GCD(51, 15) << endl; // 3ì´ ì¶œë ¥
+    cout << GCD(15, 51) << endl; // 3ì´ ì¶œë ¥
 }
