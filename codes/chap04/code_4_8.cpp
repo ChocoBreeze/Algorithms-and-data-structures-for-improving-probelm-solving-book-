@@ -1,31 +1,32 @@
+// Fibonacci - Memoization
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// fibo(N) д╬┼·дидЄесет▓╜д╣ды╟█╬є
+// fibo(N)ьЭШ ыЛ╡ьЭД ыйФыкиэХШыКФ ьЮеьЖМ
 vector<long long> memo;
 
 long long fibo(int N) {
-    // е┘б╝е╣е▒б╝е╣
+    // base case
     if (N == 0) return 0;
     else if (N == 1) return 1;
 
-    // есетдЄе┴езе├еп (д╣д╟д╦╖╫╗╗║╤д▀д╩дщд╨┼·дидЄеъе┐б╝еєд╣ды)
+    // ьЭ┤ып╕ ъ│ДьВ░ыРЬ ъ▓╜ьЪ░ эХ┤ыЛ╣ ъ▓░ъ│╝ ы░ШэЩШ
     if (memo[N] != -1) return memo[N];
 
-    // ┼·дидЄесет▓╜д╖д╩дмдщбд║╞╡в╕╞д╙╜╨д╖
+    // ыЛ╡ьЭД ыйФыкиэХШый┤ьДЬ ьЮмъ╖А эШ╕ь╢Ь
     return memo[N] = fibo(N - 1) + fibo(N - 2);
 }
 
 int main() {
-    // есет▓╜═╤╟█╬єдЄ -1 д╟╜щ┤№▓╜д╣ды
+    // -1ыбЬ ь┤Иъ╕░эЩФ
     memo.assign(50, -1);
 
-    // fibo(49) дЄдшд╙д└д╣
     fibo(49);
 
-    // memo[0], ..., memo[49] д╦┼·дидм│╩╟╝д╡дьд╞ддды
+    // memo[0], ..., memo[49] ьЧР ыЛ╡ьЭ┤ ьаАьЮеыРШьЦ┤ ьЮИьЭМ.
     for (int N = 2; N < 50; ++N) {
-        cout << N << " ╣р╠▄: " << memo[N] << endl;
+        cout << N << " щаЕчЫо: " << memo[N] << endl;
     }
+    return 0;
 }
