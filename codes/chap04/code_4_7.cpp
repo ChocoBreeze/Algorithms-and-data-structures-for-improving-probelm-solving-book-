@@ -1,4 +1,4 @@
-// Memoization Fibonacci
+// for문으로 Fibonacci
 #include <iostream>
 #include <vector>
 using namespace std;
