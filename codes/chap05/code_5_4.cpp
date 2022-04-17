@@ -1,3 +1,4 @@
+// ë°€ê¸° ì „ì´ ë°©ì‹(push-based) [i] --> [i+1] or [i+2]
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -8,21 +9,19 @@ template<class T> void chmin(T& a, T b) {
     }
 }
 
-const long long INF = 1LL << 60; // ½½Ê¬Âç¤­¤¤ÃÍ¤È¤¹¤ë (¤³¤³¤Ç¤Ï 2^60)
+const long long INF = 1LL << 60; // ì¶©ë¶„íˆ í° ê°’
 
 int main() {
-    // ÆşÎÏ
     int N; cin >> N;
     vector<long long> h(N);
     for (int i = 0; i < N; ++i) cin >> h[i];
 
-    // ½é´ü²½ (ºÇ¾®²½ÌäÂê¤Ê¤Î¤Ç INF ¤Ë½é´ü²½)
+    // ì´ˆê¸° ê°’ (minimumì´ë¯€ë¡œ INF ì´ìš©)
     vector<long long> dp(N, INF);
 
-    // ½é´ü¾ò·ï
+    // ì´ˆê¸°ì¡°ê±´
     dp[0] = 0;
 
-    // ¥ë¡¼¥×
     for (int i = 0; i < N; ++i) {
         if (i + 1 < N) {
             chmin(dp[i + 1], dp[i] + abs(h[i] - h[i + 1]));
@@ -32,6 +31,5 @@ int main() {
         }
     }
 
-    // Åú¤¨
     cout << dp[N - 1] << endl;
 }
