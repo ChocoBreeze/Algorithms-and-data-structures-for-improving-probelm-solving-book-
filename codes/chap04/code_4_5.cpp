@@ -1,8 +1,9 @@
+// í”¼ë³´ë‚˜ì¹˜ ìˆ˜ì—´
 int fibo(int N) {
-    // ¥Ù¡¼¥¹¥±¡¼¥¹
+    // base case
     if (N == 0) return 0;
     else if (N == 1) return 1;
 
-    // ºÆµ¢¸Æ¤Ó½Ð¤·
+    // ìž¬ê·€ í˜¸ì¶œ
     return fibo(N - 1) + fibo(N - 2);
 }
