@@ -1,21 +1,22 @@
+// find minimum value
 #include <iostream>
 #include <vector>
 using namespace std;
-const int INF = 20000000;   // ½½Ê¬Âç¤­¤ÊÃÍ¤Ë
+const int INF = 20000000;   // initial value = ë‹µì´ ë  ìˆ˜ ì—†ëŠ” ê°’
 
 int main() {
-    // ÆþÎÏ¤ò¼õ¤±¼è¤ë
+    
     int N;
     cin >> N;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
     
-    // Àþ·ÁÃµº÷
+    
     int min_value = INF;
     for (int i = 0; i < N; ++i) {
         if (a[i] < min_value) min_value = a[i];
     }
     
-    // ·ë²Ì½ÐÎÏ
+    // min ì¶œë ¥
     cout << min_value << endl;
 }
