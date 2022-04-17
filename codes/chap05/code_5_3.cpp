@@ -1,28 +1,29 @@
+// 5_1 + 5_2
+// O(N)
+// ëŒê¸° ì „ì´ ë°©ì‹(pull based) [i-1] or [i-2] --> [i]
 #include <iostream>
 #include <vector>
 using namespace std;
 
-template<class T> void chmin(T& a, T b) {
+template<class T> void chmin(T& a, T b) { // relaxation
     if (a > b) {
         a = b;
     }
 }
 
-const long long INF = 1LL << 60; // ½½Ê¬Âç¤­¤¤ÃÍ¤È¤¹¤ë (¤³¤³¤Ç¤Ï 2^60)
+const long long INF = 1LL << 60; // ì¶©ë¶„íˆ í° ê°’
 
 int main() {
-    // ÆşÎÏ
     int N; cin >> N;
     vector<long long> h(N);
     for (int i = 0; i < N; ++i) cin >> h[i];
 
-    // ½é´ü²½ (ºÇ¾®²½ÌäÂê¤Ê¤Î¤Ç INF ¤Ë½é´ü²½)
+    // ì´ˆê¸°í™” (ìµœì†Œí™” ë¬¸ì œì´ë¯€ë¡œ INFë¡œ ì´ˆê¸°í™”)
     vector<long long> dp(N, INF);
 
-    // ½é´ü¾ò·ï
+    // ì´ˆê¸° ì¡°ê±´
     dp[0] = 0;
 
-    // ¥ë¡¼¥×
     for (int i = 1; i < N; ++i) {
         chmin(dp[i], dp[i - 1] + abs(h[i] - h[i - 1]));
         if (i > 1) {
@@ -30,6 +31,5 @@ int main() {
         }
     }
 
-    // Åú¤¨
     cout << dp[N - 1] << endl;
 }
