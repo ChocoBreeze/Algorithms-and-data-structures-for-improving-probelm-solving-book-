@@ -15,7 +15,7 @@ int main() {
     bool exist = false;
     for (int bit = 0; bit < (1 << N); ++bit) // 1 ~ 2^N
     {
-        int sum = 0; // 部分集合に含まれる要素の和
+        int sum = 0; 
         for (int i = 0; i < N; ++i) {
             // i 번째 요소가 부분 집합에 포함된다면 더하기
             if (bit & (1 << i)) { 
