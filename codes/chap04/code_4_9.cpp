@@ -1,32 +1,34 @@
+// ì¬ê·€ë¥¼ ì´ìš©í•œ ë¶€ë¶„í•©
+// ìµœì•…ì˜ ê²½ìš° O(2^N)ê°€ì§€ í™•ì¸
+// í•´ë‹¹ ì›ì†Œë¥¼ ì„ íƒí•˜ê±°ë‚˜ ì„ íƒí•˜ì§€ ì•Šê±°ë‚˜ë¡œ ë‚˜ëˆ„ê¸°
 #include <iostream>
 #include <vector>
 using namespace std;
 
 bool func(int i, int w, const vector<int> &a) {
-    // ¥Ù¡¼¥¹¥±¡¼¥¹
+    // base case
     if (i == 0) {
         if (w == 0) return true;
         else return false;
     }
 
-    // a[i - 1] ¤òÁª¤Ğ¤Ê¤¤¾ì¹ç
+    // a[i - 1]ë¥¼ ì„ íƒí•˜ì§€ ì•Šì€ ê²½ìš°
     if (func(i - 1, w, a)) return true;
 
-    // a[i - 1] ¤ò¤Ö¾ì¹ç
+    // a[i - 1]ë¥¼ ì„ íƒí•œ ê²½ìš°
     if (func(i - 1, w - a[i - 1], a)) return true;
 
-    // ¤É¤Á¤é¤â false ¤Î¾ì¹ç¤Ï false
+    // ë‘˜ ë‹¤ falseì´ë©´ false
     return false;
 }
 
 int main() {
-    // ÆşÎÏ
     int N, W;
     cin >> N >> W;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
 
-    // ºÆµ¢Åª¤Ë²ò¤¯
+    // ì¬ê·€ì ìœ¼ë¡œ í’€ê¸°
     if (func(N, W, a)) cout << "Yes" << endl;
     else cout << "No" << endl;
 }
