@@ -1,6 +1,7 @@
 // 재귀를 이용한 부분합
 // 최악의 경우 O(2^N)가지 확인
 // 해당 원소를 선택하거나 선택하지 않거나로 나누기
+// Memoization 개선 --> practice_4_6
 #include <iostream>
 #include <vector>
 using namespace std;
