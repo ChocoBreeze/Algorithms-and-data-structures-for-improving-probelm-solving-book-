@@ -1,16 +1,17 @@
+// í”¼ë³´ë‚˜ì¹˜ ìˆ˜ì—´ì„ êµ¬í•˜ëŠ” ì¬ê·€í•¨ìˆ˜ì˜ ê³¼ì • ì¶œë ¥
 #include <iostream>
 using namespace std;
 
 int fibo(int N) {
-    cout << "fibo(" << N << ") ¤ò¸Æ¤Ó½Ğ¤·¤Ş¤·¤¿" << endl;
+    cout << "fibo(" << N << ") í˜¸ì¶œ" << endl;
     
-    // ¥Ù¡¼¥¹¥±¡¼¥¹
+    // base case
     if (N == 0) return 0;
     else if (N == 1) return 1;
 
-    // ºÆµ¢Åª¤ËÅú¤¨¤òµá¤á¤Æ½ĞÎÏ¤¹¤ë
+    // ì¬ê·€ì ìœ¼ë¡œ ë‹µì„ êµ¬í•´ì„œ ì¶œë ¥
     int result = fibo(N - 1) + fibo(N - 2);
-    cout << N << " ¹àÌÜ = " << result << endl;
+    cout << N << "  = " << result << endl;
 
     return result;
 }
