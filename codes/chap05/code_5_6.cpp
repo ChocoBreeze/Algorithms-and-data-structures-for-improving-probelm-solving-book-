@@ -1,51 +1,53 @@
+// ê°œêµ¬ë¦¬ ë¬¸ì œë¥¼ í‘¸ëŠ” ë‹¤ë¥¸ ë°©ë²•
+// ì „ì²´ íƒìƒ‰ + Memoization
+// O(N)
+// pull-based (ëŒê¸° ì „ì´)
 #include <iostream>
 #include <vector>
 using namespace std;
 
-template<class T> void chmin(T& a, T b) {
+template<class T> void chmin(T& a, T b) { // ì™„í™”
     if (a > b) {
         a = b;
     }
 }
 
-const long long INF = 1LL << 60; // ½½Ê¬Âç¤­¤¤ÃÍ¤È¤¹¤ë (¤³¤³¤Ç¤Ï 2^60)
+const long long INF = 1LL << 60; // ì¶©ë¶„íˆ í° ê°’ìœ¼ë¡œ ì´ˆê¸°í™”
 
-// ÆşÎÏ¥Ç¡¼¥¿¤È¡¤¥á¥âÍÑ¤Î DP ¥Æ¡¼¥Ö¥ë
+// ì…ë ¥ ë°ì´í„°ì™€ ë©”ëª¨ìš© DP í…Œì´ë¸”
 int N;
 vector<long long> h;
 vector<long long> dp;
 
 long long rec(int i) {
-    // DP ¤ÎÃÍ¤¬¹¹¿·¤µ¤ì¤Æ¤¤¤¿¤é¤½¤Î¤Ş¤Ş¥ê¥¿¡¼¥ó
+    // DP ê°’ì´ ìˆëŠ” ê²½ìš° ê·¸ëŒ€ë¡œ ë¦¬í„´
     if (dp[i] < INF) return dp[i];
 
-    // ¥Ù¡¼¥¹¥±¡¼¥¹: Â­¾ì 0 ¤Î¥³¥¹¥È¤Ï 0
+    // base case : ë°œíŒ 0ì˜ ë¹„ìš©ì€ 0
     if (i == 0) return 0;
 
-    // Åú¤¨¤òÉ½¤¹ÊÑ¿ô¤ò INF ¤Ç½é´ü²½¤¹¤ë
+    // ë‹µì„ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜ë¥¼ INFë¡œ ì´ˆê¸°í™”
     long long res = INF;
 
-    // Â­¾ì i - 1 ¤«¤éÍè¤¿¾ì¹ç
+    // i - 1 ë°œíŒì—ì„œ ì˜¨ ê²½ìš°
     chmin(res, rec(i - 1) + abs(h[i] - h[i - 1])); 
     
-    // Â­¾ì i - 2 ¤«¤éÍè¤¿¾ì¹ç
+    // i - 2 ë°œíŒì—ì„œ ì˜¨ ê²½ìš°
     if (i > 1) {
         chmin(res, rec(i - 2) + abs(h[i] - h[i - 2]));
     }
 
-    // ·ë²Ì¤ò¥á¥â¤·¤Ê¤¬¤é¡¢ÊÖ¤¹
+    // ê²°ê³¼ë¥¼ ë©”ëª¨í•˜ë©´ì„œ ëŒë ¤ì¤Œ
     return dp[i] = res;
 }
 
 int main() {
-    // ÆşÎÏ¼õ¤±¼è¤ê
     cin >> N;
     h.resize(N);
     for (int i = 0; i < N; ++i) cin >> h[i];
 
-    // ½é´ü²½ (ºÇ¾®²½ÌäÂê¤Ê¤Î¤Ç INF ¤Ë½é´ü²½)
+    // ì´ˆê¸°ê°’ (ìµœì†Œí™” ë¬¸ì œë¼ì„œ INFë¡œ ì´ˆê¸°í™”)
     dp.assign(N, INF);
 
-    // Åú¤¨
     cout << rec(N - 1) << endl;
 }
