@@ -1,23 +1,21 @@
+// ì„ í˜• íƒìƒ‰(listì—ì„œ í•´ë‹¹ ì›ì†Œê°€ ìˆëŠ”ì§€ í™•ì¸)
 #include <iostream>
 #include <vector>
 using namespace std;
 
 int main() {
-    // ÆşÎÏ¤ò¼õ¤±¼è¤ë
     int N, v;
     cin >> N >> v;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
     
-    // Àş·ÁÃµº÷
-    bool exist = false;   // ½é´üÃÍ¤Ï false ¤Ë
+    bool exist = false;
     for (int i = 0; i < N; ++i) {
-        if (a[i] == v) {
-            exist = true;  // ¸«¤Ä¤«¤Ã¤¿¤é¥Õ¥é¥°¤òÎ©¤Æ¤ë
+        if (a[i] == v) { // ë°œê²¬í•˜ë©´ flag ì„¤ì •
+            exist = true;
         }
     }
     
-    // ·ë²Ì½ĞÎÏ
     if (exist) cout << "Yes" << endl;
     else cout << "No" << endl;
 }
