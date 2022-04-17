@@ -1,4 +1,5 @@
 // 선형 탐색(list에서 해당 원소가 있는지 확인)
+// 
 #include <iostream>
 #include <vector>
 using namespace std;
