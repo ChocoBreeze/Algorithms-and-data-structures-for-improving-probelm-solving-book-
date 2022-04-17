@@ -1,23 +1,22 @@
+// íƒìƒ‰ + í•´ë‹¹ ì›ì†Œì˜ ìœ„ì¹˜ê¹Œì§€
 #include <iostream>
 #include <vector>
 using namespace std;
 
 int main() {
-    // ÆşÎÏ¤ò¼õ¤±¼è¤ë
+    
     int N, v;
     cin >> N >> v;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
     
-    // Àş·ÁÃµº÷
-    int found_id = -1; // ½é´üÃÍ¤Ï -1 ¤Ê¤É¤¢¤ê¤¨¤Ê¤¤ÃÍ¤Ë
+    int found_id = -1; // ë‹µì´ ë  ìˆ˜ ì—†ëŠ” ê°’ìœ¼ë¡œ ì´ˆê¸°í™”
     for (int i = 0; i < N; ++i) {
-        if (a[i] == v) {
-            found_id = i; // ¸«¤Ä¤«¤Ã¤¿¤éÅº»ú¤òµ­Ï¿
-            break; // ¥ë¡¼¥×¤òÈ´¤±¤ë
+        if (a[i] == v) { // ì°¾ìŒ
+            found_id = i; 
+            break; 
         }
     }
-    
-    // ·ë²Ì½ĞÎÏ (-1 ¤Î¤È¤­¤Ï¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¤³¤È¤òÉ½¤¹)
+    // -1ì¸ ê²½ìš° ëª» ì°¾ì€ case
     cout << found_id << endl;
 }
