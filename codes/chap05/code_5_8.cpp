@@ -1,3 +1,6 @@
+// Edit distance
+// O(|S||T|)
+// Sì˜ ë¬¸ì ì‚½ì…ì€ Tì˜ ë¬¸ì ì‚­ì œì™€ ë™ì¼í•¨
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,40 +12,37 @@ template<class T> void chmin(T& a, T b) {
     }
 }
 
-const int INF = 1 << 29; // ½½Ê¬Âç¤­¤ÊÃÍ (¤³¤³¤Ç¤Ï 2^29 ¤È¤¹¤ë)
+const int INF = 1 << 29; // ì¶©ë¶„íˆ í° ê°’(2^29)
 
 int main() {
-    // ÆşÎÏ
     string S, T;
     cin >> S >> T;
     
-    // DP ¥Æ¡¼¥Ö¥ëÄêµÁ
+    // DP table ì •ì˜
     vector<vector<int>> dp(S.size() + 1, vector<int>(T.size() + 1, INF));
 
-    // DP ½é´ü¾ò·ï
+    // DP ì´ˆê¸° ì¡°ê±´
     dp[0][0] = 0;
 
-    // DP¥ë¡¼¥×
     for (int i = 0; i <= S.size(); ++i) {
         for (int j = 0; j <= T.size(); ++j) {
-            // ÊÑ¹¹Áàºî
+            // ë³€ê²½ ì¡°ì‘
             if (i > 0 && j > 0) {
-                if (S[i - 1] == T[j - 1]) {
+                if (S[i - 1] == T[j - 1]) { // ë‘ ë¬¸ìê°€ ë™ì¼ --> ì‘ì—… í•„ìš” x
                     chmin(dp[i][j], dp[i - 1][j - 1]);
                 }
-                else {
+                else { // ë‘ ë¬¸ìê°€ ë‹¤ë¦„ --> ëŒ€ì²´ ì‘ì—… í•„ìš”
                     chmin(dp[i][j], dp[i - 1][j - 1] + 1);
                 }
             }
             
-            // ºï½üÁàºî
+            // ì‚­ì œ ì‘ì—…
             if (i > 0) chmin(dp[i][j], dp[i - 1][j] + 1);
 
-            // ÁŞÆşÁàºî
+            // ì‚½ì… ì‘ì—…
             if (j > 0) chmin(dp[i][j], dp[i][j - 1] + 1);
         }
     }
     
-    // Åú¤¨¤Î½ĞÎÏ
     cout << dp[S.size()][T.size()] << endl;
 }
