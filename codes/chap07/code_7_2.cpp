@@ -1,33 +1,34 @@
+// interval scheduling problem
+// O(NlogN)
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <functional>
 using namespace std;
 
-// ¶è´Ö¤ò pair<int,int> ¤ÇÉ½¤¹
+// êµ¬ê°„
 typedef pair<int,int> Interval;
 
-// ¶è´Ö¤ò½ªÃ¼»ş¹ï¤ÇÂç¾®Èæ³Ó¤¹¤ë´Ø¿ô
+// êµ¬ê°„ì— ëŒ€í•´ ì¢…ë£Œ ì‹œê°ì„ ê¸°ì¤€ìœ¼ë¡œ ë¹„êµí•˜ëŠ” í•¨ìˆ˜
 bool cmp(const Interval &a, const Interval &b) {
     return a.second < b.second;
 }
 
 int main() {
-    // ÆşÎÏ
     int N;
     cin >> N;
     vector<Interval> inter(N);
     for (int i = 0; i < N; ++i)
         cin >> inter[i].first >> inter[i].second;
 
-    // ½ªÃ¼»ş¹ï¤¬Áá¤¤½ç¤Ë¥½¡¼¥È¤¹¤ë
+    // ì •ë ¬ - ì¢…ë£Œ ì‹œê°„ì´ ë¹ ë¥¸ ê²ƒì´ ë¨¼ì € ì˜¤ë„ë¡ --> O(NlogN)
     sort(inter.begin(), inter.end(), cmp);
 
-    // ìÅÍß¤ËÁª¤Ö
+    // íƒìš•ë²• --> O(N)
     int res = 0;
     int current_end_time = 0;
     for (int i = 0; i < N; ++i) {
-        // ºÇ¸å¤ËÁª¤ó¤À¶è´Ö¤ÈÈï¤ë¤Î¤Ï½ü¤¯
+        // ì´ì „ì— ê³ ë¥¸ êµ¬ê°„ê³¼ ê²¹ì¹˜ë©´ ì œì™¸
         if (inter[i].first < current_end_time) continue;
 
         ++res;
