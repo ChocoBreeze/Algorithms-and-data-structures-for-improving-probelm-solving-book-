@@ -4,23 +4,24 @@ using namespace std;
 int main() {
     cout << "Start Game!" << endl;
 
-    // A ¤µ¤ó¤Î¿ô¤Î¸õÊä¤òÉ½¤¹¶è´Ö¤ò¡¢[left, right) ¤ÈÉ½¤¹
+    // Aì”¨ì˜ ë‚˜ì´ í›„ë³´ êµ¬ê°„ì„ [left, right)ë¡œ í‘œì‹œ
     int left = 20, right = 36;
 
-    // A ¤µ¤ó¤Î¿ô¤ò 1 ¤Ä¤Ë¹Ê¤ì¤Ê¤¤¤¦¤Á¤Ï·«¤êÊÖ¤¹
+    // í›„ë³´ê°€ í•˜ë‚˜ê°€ ë  ë•Œê¹Œì§€ ë°˜ë³µ
     while (right - left > 1) {
-        int mid = left + (right - left) / 2; // ¶è´Ö¤Î¿¿¤óÃæ
+        int mid = left + (right - left) / 2; //êµ¬ê°„ í•œê°€ìš´ë°
+        // mid = (left + right) / 2 --> overflow
 
-        // mid °Ê¾å¤«¤òÊ¹¤¤¤Æ¡¢²óÅú¤ò yes/no ¤Ç¼õ¤±¼è¤ë
+        // mid ì´ìƒì¸ì§€ ë¬¼ì–´ì„œ yes/no ë‹µ ë°›ê¸°
         cout << "Is the age less than " << mid << " ? (yes / no)" << endl;
         string ans;
         cin >> ans;
 
-        // ²óÅú¤Î±ş¤¸¤Æ¡¢¤¢¤ë¤¦¤ë¿ô¤ÎÈÏ°Ï¤ò¹Ê¤ë
+        // ì…ë ¥ê°’ì— ë”°ë¼ ë²”ìœ„ ì¤„ì´ê¸°
         if (ans == "yes") right = mid;
         else left = mid;
     }
 
-    // ¥º¥Ğ¥êÅö¤Æ¤ë¡ª
+    // ì •ë‹µ
     cout << "The age is " << left << "!" << endl;
 }
