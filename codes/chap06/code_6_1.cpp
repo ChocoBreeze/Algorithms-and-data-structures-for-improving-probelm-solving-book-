@@ -1,3 +1,5 @@
+// binary search
+// O(logN)
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -5,11 +7,11 @@ using namespace std;
 const int N = 8;
 const vector<int> a = {3, 5, 8, 10, 14, 17, 21, 39};
 
-// ÌÜÅª¤ÎÃÍ key ¤ÎÅº»ú¤òÊÖ¤¹ (Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ï -1)
+// ì°¾ê³  ì‹¶ì€ key ê°’ì˜ index ë°˜í™˜(ì¡´ìž¬í•˜ì§€ ì•Šìœ¼ë©´ -1 ë°˜í™˜)
 int binary_search(int key) {
-    int left = 0, right = (int)a.size() - 1; // ÇÛÎó a ¤Îº¸Ã¼¤È±¦Ã¼
+    int left = 0, right = (int)a.size() - 1; // ë°°ì—´ a ì™¼ìª½ê³¼ ì˜¤ë¥¸ìª½
     while (right >= left) {
-        int mid = left + (right - left) / 2; // ¶è´Ö¤Î¿¿¤óÃæ
+        int mid = left + (right - left) / 2; // ì¤‘ê°„
         if (a[mid] == key) return mid;
         else if (a[mid] > key) right = mid - 1;
         else if (a[mid] < key) left = mid + 1;
