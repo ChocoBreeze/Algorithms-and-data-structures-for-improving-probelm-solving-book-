@@ -1,3 +1,4 @@
+// 일반화한 이진 탐색법
 #include <iostream>
 using namespace std;
 
