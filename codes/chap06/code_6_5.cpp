@@ -1,5 +1,6 @@
 // 최적화 문제를 판정 문제로
 // 최종적인 패널티를 x 이하로 만들 수 있는지 판정하는 문제
+// O(NlogNlogM)
 #include <iostream>
 #include <algorithm>
 #include <vector>
