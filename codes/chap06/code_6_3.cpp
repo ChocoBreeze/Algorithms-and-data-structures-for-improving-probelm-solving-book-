@@ -1,3 +1,4 @@
+// 나이 맞히기 O(logN)
 #include <iostream>
 using namespace std;
 
