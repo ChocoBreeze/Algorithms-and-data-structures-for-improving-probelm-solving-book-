@@ -1,36 +1,37 @@
+// í•©ì´ K ì´ìƒì¸ ë²”ìœ„ì—ì„œ ìµœì†Œê°’ êµ¬í•˜ê¸°
+// O(NlogN)
 #include <iostream>
 #include <vector>
-#include <algorithm> // sort() ¤ä lower_bound() ¤ËÉ¬Í×¤Ç¤¹
+#include <algorithm> // sort(), lower_bound()
 using namespace std;
-const int INF = 20000000; // ½½Ê¬Âç¤­¤ÊÃÍ¤Ë
+const int INF = 20000000; // ì¶©ë¶„íˆ í° ê°’
 
 int main() {
-    // ÆşÎÏ¤ò¼õ¤±¼è¤ë
     int N, K;
     cin >> N >> K;
     vector<int> a(N), b(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
     for (int i = 0; i < N; ++i) cin >> b[i];
 
-    // »ÃÄêºÇ¾®ÃÍ¤ò³ÊÇ¼¤¹¤ëÊÑ¿ô
+    // ì ì • ìµœì†Ÿê°’ì„ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
     int min_value = INF;
 
-    // b ¤ò¥½¡¼¥È
+    // b ì •ë ¬ -- std::lower_bound ì“°ê¸° ìœ„í•´ì„œ
     sort(b.begin(), b.end());
 
-    // b ¤ËÌµ¸ÂÂç¤òÉ½¤¹ÃÍ (INF) ¤òÄÉ²Ã¤·¤Æ¤ª¤¯
-    // ¤³¤ì¤ò¹Ô¤¦¤³¤È¤Ç¡¢iter = b.end() ¤È¤Ê¤ë²ÄÇ½À­¤ò½ü³°¤¹¤ë
+    // bì— ë¬´í•œëŒ€ë¥¼ ì¶”ê°€
+    // ê·¸ ê²°ê³¼ iter = b.end()ê°€ ë˜ì§€ ì•ŠìŒ.
     b.push_back(INF);
 
-    // a ¤ò¸ÇÄê¤·¤Æ²ò¤¯
+    // aë¥¼ ê³ ì •í•œ í›„ í’€ê¸°
     for (int i = 0; i < N; ++i) {
-        // b ¤ÎÃæ¤Ç K - a[i] °Ê¾å¤ÎÈÏ°Ï¤Ç¤ÎºÇ¾®ÃÍ¤ò¼¨¤¹¥¤¥Æ¥ì¡¼¥¿
+        // bì—ì„œ K - a[i] ì´ìƒ ë²”ìœ„ì˜ ìµœì†Ÿê°’ì„ ê°€ë¦¬í‚¤ëŠ” iterator
         auto iter = lower_bound(b.begin(), b.end(), K - a[i]);
 
-        // ¥¤¥Æ¥ì¡¼¥¿¤Î¼¨¤¹ÃÍ¤ò¼è¤ê½Ğ¤¹
+        // iteratorê°€ ê°€ë¦¬í‚¤ëŠ” ê°’ì„ ì¶”ì¶œ
         int val = *iter;
 
-        // min_value ¤ÈÈæ³Ó¤¹¤ë
+        // min_valueì™€ ë¹„êµ
         if (a[i] + val < min_value) {
             min_value = a[i] + val;
         }
