@@ -1,21 +1,40 @@
+// ê·¸ëž˜í”„ êµ¬í˜„
 #include <iostream>
 #include <vector>
 using namespace std;
 using Graph = vector<vector<int>>;
 
 int main() {
-    // ÄºÅÀ¿ô¤ÈÊÕ¿ô
+    // ê¼­ì§“ì  ê°œìˆ˜ì™€ ë³€ ê°œìˆ˜
     int N, M;
     cin >> N >> M;
 
-    // ¥°¥é¥Õ
+    // ê·¸ëž˜í”„
     Graph G(N);
     for (int i = 0; i < M; ++i) {
         int a, b;
         cin >> a >> b;
         G[a].push_back(b);
 
-        // Ìµ¸þ¥°¥é¥Õ¤Î¾ì¹ç¤Ï°Ê²¼¤òÄÉ²Ã
+       // ë¬´í–¥ ê·¸ëž˜í”„ë¼ë©´ ë‹¤ìŒ ì¤„ ì£¼ì„ì„ ì œê±°í•´ì„œ ì¶”ê°€
         // G[b].push_back(a);
     }
 }
+/*
+N(vertex ê°œìˆ˜) M(edge ê°œìˆ˜)
+ai bi (ai -> bi)
+input(directed graph)
+8 12
+4 1
+4 2
+4 6
+1 3
+1 6
+2 5
+2 7
+6 7
+3 0
+3 7
+7 0
+0 5
+*/
