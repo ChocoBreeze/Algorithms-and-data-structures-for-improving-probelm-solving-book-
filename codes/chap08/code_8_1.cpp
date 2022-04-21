@@ -1,3 +1,4 @@
+// ë°°ì—´ --> std::vector
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -5,15 +6,15 @@ using namespace std;
 int main() {
     vector<int> a = {4, 3, 12, 7, 11, 1, 9, 8, 14, 6};
 
-    // 0 ÈÖÌÜ¤ÎÍ×ÁÇ¤ò½ĞÎÏ (4)
+    // 0ë²ˆ ìš”ì†Œ
     cout << a[0] << endl;
 
-    // 2 ÈÖÌÜ¤ÎÍ×ÁÇ¤ò½ĞÎÏ (12)
+    // 2ë²ˆ ìš”ì†Œ
     cout << a[2] << endl;
 
-    // 2 ÈÖÌÜ¤ÎÍ×ÁÇ¤ò 5 ¤Ë½ñ¤­´¹¤¨¤ë
+    // 2ë²ˆ ìš”ì†Œ ë³€ê²½
     a[2] = 5;
 
-    // 2 ÈÖÌÜ¤ÎÍ×ÁÇ¤ò½ĞÎÏ (5)
+    // 2ë²ˆ ìš”ì†Œ
     cout << a[2] << endl;
 }
