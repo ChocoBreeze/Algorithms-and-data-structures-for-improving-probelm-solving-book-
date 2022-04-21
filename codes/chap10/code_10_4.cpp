@@ -1,23 +1,24 @@
+// weighted graph
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// ¤³¤³¤Ç¤Ï½Å¤ß¤òÉ½¤¹·¿¤ò long long ·¿¤È¤¹¤ë
+// ê°€ì¤‘ì¹˜ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìë£Œí˜•ì€ long longí˜•
 struct Edge {
-    int to; // ÎÙÀÜÄºÅÀÈÖ¹æ
-    long long w; // ½Å¤ß
-    Edge(int to, long long w) : to(to), w(w) {}
+    int to; // ì¸ì ‘ ê¼­ì§“ì  ë²ˆí˜¸
+    long long w; // ê°€ì¤‘ì¹˜
+    Edge(int to, long long w) : to(to), w(w) {} // ìƒì„±ì ì¸ë“¯?
 };
     
-// ³ÆÄºÅÀ¤ÎÎÙÀÜ¥ê¥¹¥È¤ò¡¤ÊÕ½¸¹ç¤ÇÉ½¤¹
+// ê° ê¼­ì§“ì ì˜ ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ë¥¼ ë³€ ì§‘í•©ìœ¼ë¡œ ë‚˜íƒ€ëƒ„
 using Graph = vector<vector<Edge>>;
 
 int main() {
-    // ÄºÅÀ¿ô¤ÈÊÕ¿ô
+    // ê¼­ì§“ì  ê°œìˆ˜ì™€ ë³€ ê°œìˆ˜
     int N, M;
     cin >> N >> M;
 
-    // ¥°¥é¥Õ
+    // ê·¸ë˜í”„
     Graph G(N);
     for (int i = 0; i < M; ++i) {
         int a, b;
