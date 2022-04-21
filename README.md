@@ -35,7 +35,8 @@ https://www.amazon.co.jp/dp/4065128447
 
 # 추가
 한국어 코드 : https://github.com/gilbutITbook/080288
-
+원저자의 github 내용으로, 해당 내용을 번역해서 출판한 '문제 해결력을 높이는 알고리즘과 자료구조'라는 책의
+코드 내용과 + 책의 내용을 나름 요약해서 공부용으로 저장
 
 # License
 
