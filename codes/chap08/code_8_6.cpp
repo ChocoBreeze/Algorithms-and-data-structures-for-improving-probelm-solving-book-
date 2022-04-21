@@ -1,37 +1,38 @@
+// bidirectional linked list
 #include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
 
-// Ï¢·ë¥ê¥¹¥È¤Î³Æ¥Î¡¼¥É¤òÉ½¤¹¹½Â¤ÂÎ
+// ì—°ê²° ë¦¬ìŠ¤íŠ¸ì˜ ê° ë…¸ë“œë¥¼ ê°€ë¦¬í‚¤ëŠ” êµ¬ì¡°ì²´
 struct Node {
     Node *prev, *next;
-    string name; // ¥Î¡¼¥É¤ËÉÕ¿ï¤·¤Æ¤¤¤ëÃÍ
+    string name; // ë…¸ë“œì— ì €ì¥í•˜ëŠ” ê°’
 
     Node(string name_ = "") :
     prev(NULL), next(NULL), name(name_) { }
 };
 
-// ÈÖÊ¼¤òÉ½¤¹¥Î¡¼¥É¤ò¥°¥í¡¼¥Ğ¥ëÎÎ°è¤ËÃÖ¤¤¤Æ¤ª¤¯
+// ê°ì‹œ ë…¸ë“œë¥¼ ì „ì—­ ë³€ìˆ˜ë¡œ ì„¤ì •
 Node* nil;
 
-// ½é´ü²½
+// ì´ˆê¸°í™”
 void init() {
     nil = new Node();
-    nil->prev = nil; 
+    nil->prev = nil;
     nil->next = nil;
 }
 
-// Ï¢·ë¥ê¥¹¥È¤ò½ĞÎÏ¤¹¤ë
+// ì—°ê²° ë¦¬ìŠ¤íŠ¸ë¥¼ ì¶œë ¥
 void printList() {
-    Node* cur = nil->next; // ÀèÆ¬¤«¤é½ĞÈ¯
+    Node* cur = nil->next; // ì„ ë‘ë¶€í„° ì¶œë°œ
     for (; cur != nil; cur = cur->next) {
         cout << cur->name << " -> ";
     }
     cout << endl;
 }
 
-// ¥Î¡¼¥É p ¤ÎÄ¾¸å¤Ë¥Î¡¼¥É v ¤òÁŞÆş¤¹¤ë
+// ë…¸ë“œ p ì§í›„ì— ë…¸ë“œ v ì‚½ì…
 void insert(Node* v, Node* p = nil) {
     v->next = p->next;
     p->next->prev = v;
@@ -39,44 +40,44 @@ void insert(Node* v, Node* p = nil) {
     v->prev = p;
 }
 
-// ¥Î¡¼¥É v ¤òºï½ü¤¹¤ë
+// ë…¸ë“œ v ì‚­ì œ
 void erase(Node *v) {
-    if (v == nil) return; // v ¤¬ÈÖÊ¼¤Î¾ì¹ç¤Ï²¿¤â¤·¤Ê¤¤
+    if (v == nil) return; // vê°€ ê°ì‹œ ë…¸ë“œì´ë©´ ì•„ë¬´ ê²ƒë„ í•˜ì§€ ì•ŠìŒ
     v->prev->next = v->next;
     v->next->prev = v->prev;
-    delete v; // ¥á¥â¥ê¤ò³«Êü
+    delete v; // ë©”ëª¨ë¦¬ í•´ë°©
 }
 
 int main() {
-    // ½é´ü²½
+    // ì´ˆê¸°í™”
     init();
 
-    // ºî¤ê¤¿¤¤¥Î¡¼¥É¤ÎÌ¾Á°¤Î°ìÍ÷
-    // ºÇ¸åÈø¤Î¥Î¡¼¥É (¡Ö»³ËÜ¡×) ¤«¤é½ç¤ËÁŞÆş¤¹¤ë¤³¤È¤ËÃí°Õ
-    vector<string> names = {"yamamoto",
-                            "watanabe",
-                            "ito",
-                            "takahashi",
-                            "suzuki",
-                            "sato"};
+    // ë§Œë“¤ê³  ì‹¶ì€ ë…¸ë“œëª… ëª©ë¡
+    // ë§ˆì§€ë§‰ ë…¸ë“œ(ë°±í˜¸)ë¶€í„° ìˆœì„œëŒ€ë¡œ ì‚½ì…í•˜ë¯€ë¡œ ì£¼ì˜
+    vector<string> names = {"bakho",
+                            "myongjin",
+                            "rangi",
+                            "daeho",
+                            "nara",
+                            "gildong"};
 
-    // Ï¢·ë¥ê¥¹¥ÈºîÀ®: ³Æ¥Î¡¼¥É¤òÀ¸À®¤·¤ÆÏ¢·ë¥ê¥¹¥È¤ÎÀèÆ¬¤ËÁŞÆş¤·¤Æ¤¤¤¯
-    Node *watanabe;
+    // ì—°ê²° ë¦¬ìŠ¤íŠ¸ ì‘ì„±: ê° ë…¸ë“œë¥¼ ìƒì„±í•´ì„œ ì—°ê²° ë¦¬ìŠ¤íŠ¸ ì„ ë‘ì— ì‚½ì…
+    Node *myongjin;
     for (int i = 0; i < (int)names.size(); ++i) {
-        // ¥Î¡¼¥É¤òºîÀ®¤¹¤ë
+        // ë…¸ë“œ ì‘ì„±
         Node* node = new Node(names[i]);
 
-        // ºîÀ®¤·¤¿¥Î¡¼¥É¤òÏ¢·ë¥ê¥¹¥È¤ÎÀèÆ¬¤ËÁŞÆş¤¹¤ë
+        // ì‘ì„±í•œ ë…¸ë“œë¥¼ ì—°ê²° ë¦¬ìŠ¤íŠ¸ ì„ ë‘ì— ì‚½ì…
         insert(node);
 
-        // ¡ÖÅÏÊÕ¡×¥Î¡¼¥É¤òÊİ»ı¤·¤Æ¤ª¤¯
-        if (names[i] == "watanabe") watanabe = node;
+        // ëª…ì§„ ë…¸ë“œë¥¼ ì €ì¥
+        if (names[i] == "myongjin") myongjin = node;
     }
 
-    // ¡ÖÅÏÊÕ¡×¥Î¡¼¥É¤òºï½ü¤¹¤ë
+    // ëª…ì§„ ë…¸ë“œ ì‚­ì œ
     cout << "before: ";
-    printList(); // ºï½üÁ°¤ò½ĞÎÏ
-    erase(watanabe);
+    printList(); // ì‚­ì œ ì „ì— ì¶œë ¥
+    erase(myongjin);
     cout << "after: ";
-    printList(); // ºï½ü¸å¤ò½ĞÎÏ
+    printList(); // ì‚­ì œ í›„ì— ì¶œë ¥
 }
