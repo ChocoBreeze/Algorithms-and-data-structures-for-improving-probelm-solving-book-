@@ -1,6 +1,7 @@
+// self-referencing structure
 struct Node {
-    Node* next; // ¼¡¤¬¤É¤Î¥Î¡¼¥É¤ò»Ø¤¹¤«
-    string name; // ¥Î¡¼¥É¤ËÉÕ¿ï¤·¤Æ¤¤¤ëÃÍ
+    Node* next; // ë‹¤ìŒì´ ì–´ë–¤ ë…¸ë“œì¸ì§€
+    string name; // ë…¸ë“œì— ì €ì¥ëœ ê°’
 
     Node(string name_ = "") : next(NULL), name(name_) { }
 };
