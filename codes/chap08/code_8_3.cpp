@@ -1,4 +1,4 @@
-// ¥Î¡¼¥É p ¤ÎÄ¾¸å¤Ë¥Î¡¼¥É v ¤òÁÞÆþ¤¹¤ë
+// ë…¸ë“œ p ì§í›„ì— ë…¸ë“œ vë¥¼ ì‚½ìž…
 void insert(Node* v, Node* p) {
     v->next = p->next;
     p->next = v;
