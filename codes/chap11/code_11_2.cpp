@@ -1,4 +1,4 @@
 int root(int x) {
-    if (par[x] == -1) return x; // x ¤¬º¬¤Î¾ì¹ç¤Ï x ¤òÄ¾ÀÜÊÖ¤¹
-    else return par[x] = root(par[x]); // x ¤Î¿Æ par[x] ¤òº¬¤ËÀßÄê¤¹¤ë
+    if (par[x] == -1) return x; // xê°€ ë£¨íŠ¸ë¼ë©´ xë¥¼ ë°˜í™˜
+    else return par[x] = root(par[x]); // xì˜ ë¶€ëª¨ ê°’ì¸ par[x]ë¥¼ rootë¡œ ì„¤ì •
 }
