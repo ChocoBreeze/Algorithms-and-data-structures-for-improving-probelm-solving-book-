@@ -1,3 +1,4 @@
+// Union Find êµ¬í˜„
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -6,39 +7,39 @@ using namespace std;
 struct UnionFind {
     vector<int> par, siz;
 
-    // ½é´ü²½
+    // ì´ˆê¸°í™”
     UnionFind(int n) : par(n, -1) , siz(n, 1) { }
-    
-    // º¬¤òµá¤á¤ë
-    int root(int x) {
-        if (par[x] == -1) return x; // x ¤¬º¬¤Î¾ì¹ç¤Ï x ¤òÊÖ¤¹
+
+    // ë£¨íŠ¸ë¥¼ êµ¬í•¨
+    int root(int x) { // ê²½ë¡œ ì••ì¶• ë°˜ì˜
+        if (par[x] == -1) return x; // xê°€ ë£¨íŠ¸ì´ë©´ xë¥¼ ë°˜í™˜
         else return par[x] = root(par[x]);
     }
 
-    // x ¤È y ¤¬Æ±¤¸¥°¥ë¡¼¥×¤ËÂ°¤¹¤ë¤«¤É¤¦¤« (º¬¤¬°ìÃ×¤¹¤ë¤«¤É¤¦¤«)
+    // xì™€ yê°€ ê°™ì€ ê·¸ë£¹ì— ì†í•´ ìˆëŠ”ê°€(ë£¨íŠ¸ê°€ ì¼ì¹˜í•˜ëŠ”ê°€)
     bool issame(int x, int y) {
         return root(x) == root(y);
     }
 
-    // x ¤ò´Ş¤à¥°¥ë¡¼¥×¤È y ¤ò´Ş¤à¥°¥ë¡¼¥×¤È¤òÊ»¹ç¤¹¤ë
-    bool unite(int x, int y) {
-        // x, y ¤ò¤½¤ì¤¾¤ìº¬¤Ş¤Ç°ÜÆ°¤¹¤ë
+    // xë¥¼ í¬í•¨í•œ ê·¸ë£¹ê³¼ yë¥¼ í¬í•¨í•œ ê·¸ë£¹ì„ ë³‘í•©í•¨
+    bool unite(int x, int y) { // union by size
+        // x, yë¥¼ ê°ê° ë£¨íŠ¸ê¹Œì§€ ì´ë™ì‹œí‚´
         x = root(x);
         y = root(y);
 
-        // ¤¹¤Ç¤ËÆ±¤¸¥°¥ë¡¼¥×¤Î¤È¤­¤Ï²¿¤â¤·¤Ê¤¤
-        if (x == y) return false; 
+        // ì´ë¯¸ ê°™ì€ ê·¸ë£¹ì´ë¼ë©´ ì•„ë¬´ ê²ƒë„ ì•ˆí•¨
+        if (x == y) return false;
 
-        // union by size (y Â¦¤Î¥µ¥¤¥º¤¬¾®¤µ¤¯¤Ê¤ë¤è¤¦¤Ë¤¹¤ë)
+        // union by size (yìª½ì´ í¬ê¸°ê°€ ì‘ë„ë¡ ë§Œë“¤ê¸°)
         if (siz[x] < siz[y]) swap(x, y);
 
-        // y ¤ò x ¤Î»Ò¤È¤¹¤ë
+        // yë¥¼ xì˜ ìì‹ìœ¼ë¡œ ë§Œë“¤ê¸°
         par[y] = x;
         siz[x] += siz[y];
         return true;
     }
 
-    // x ¤ò´Ş¤à¥°¥ë¡¼¥×¤Î¥µ¥¤¥º
+    // xë¥¼ í¬í•¨í•œ ê·¸ë£¹ í¬ê¸°
     int size(int x) {
         return siz[root(x)];
     }
