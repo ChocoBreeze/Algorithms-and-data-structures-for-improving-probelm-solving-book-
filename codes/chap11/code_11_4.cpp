@@ -1,3 +1,6 @@
+// Union-Findë¡œ
+// ë¬´í–¥ ê·¸ë˜í”„ì˜ ì—°ê²° ìš”ì†Œ ê°œìˆ˜ ì„¸ê¸°
+// root treeì˜ rootê°€ ë˜ëŠ” ê¼­ì§“ì  ê°œìˆ˜ ì„¸ê¸°
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -8,49 +11,49 @@ struct UnionFind {
 
     UnionFind(int n) : par(n, -1) , siz(n, 1) { }
 
-    // º¬¤òµá¤á¤ë
+    // ë£¨íŠ¸ êµ¬í•˜ê¸°
     int root(int x) {
         if (par[x] == -1) return x;
         else return par[x] = root(par[x]);
     }
 
-    // x ¤È y ¤¬Æ±¤¸¥°¥ë¡¼¥×¤ËÂ°¤¹¤ë¤«¤É¤¦¤« (º¬¤¬°ìÃ×¤¹¤ë¤«¤É¤¦¤«)
+    // xì™€ yê°€ ê°™ì€ ê·¸ë£¹ì— ì†í•˜ëŠ”ê°€(ë£¨íŠ¸ê°€ ì¼ì¹˜í•˜ëŠ”ê°€)
     bool issame(int x, int y) {
         return root(x) == root(y);
     }
 
-    // x ¤ò´Ş¤à¥°¥ë¡¼¥×¤È y ¤ò´Ş¤à¥°¥ë¡¼¥×¤È¤òÊ»¹ç¤¹¤ë
+    // xë¥¼ í¬í•¨í•œ ê·¸ë£¹ê³¼ yë¥¼ í¬í•¨í•œ ê·¸ë£¹ì„ ë³‘í•©
     bool unite(int x, int y) {
         x = root(x), y = root(y);
-        if (x == y) return false; 
+        if (x == y) return false;
         if (siz[x] < siz[y]) swap(x, y);
         par[y] = x;
         siz[x] += siz[y];
         return true;
     }
 
-    // x ¤ò´Ş¤à¥°¥ë¡¼¥×¤Î¥µ¥¤¥º
+    // xë¥¼ í¬í•¨í•˜ëŠ” ê·¸ë£¹ í¬ê¸°
     int size(int x) {
         return siz[root(x)];
     }
 };
 
 int main() {
-    // ÄºÅÀ¿ô¤ÈÊÕ¿ô
+    // ê¼­ì§“ì  ê°œìˆ˜ì™€ ë³€ ê°œìˆ˜
     int N, M;
     cin >> N >> M;
 
-    // Union-Find ¤òÍ×ÁÇ¿ô N ¤Ç½é´ü²½
+    // Union-Findë¥¼ ìš”ì†Œ ê°œìˆ˜ Nìœ¼ë¡œ ì´ˆê¸°í™”
     UnionFind uf(N);
 
-    // ³ÆÊÕ¤ËÂĞ¤¹¤ë½èÍı
+    // ê° ë³€ì— ëŒ€í•œ ì²˜ë¦¬
     for (int i = 0; i < M; ++i) {
         int a, b;
         cin >> a >> b;
-        uf.unite(a, b); // a ¤ò´Ş¤à¥°¥ë¡¼¥×¤È b ¤ò´Ş¤à¥°¥ë¡¼¥×¤òÊ»¹ç¤¹¤ë
+        uf.unite(a, b); // aë¥¼ í¬í•¨í•˜ëŠ” ê·¸ë£¹ê³¼ bë¥¼ í¬í•¨í•˜ëŠ” ê·¸ë£¹ì„ ë³‘í•©
     }
 
-    // ½¸·×
+    // ì§‘ê³„
     int res = 0;
     for (int x = 0; x < N; ++x) {
         if (uf.root(x) == x) ++res;
