@@ -1,3 +1,5 @@
+// Heap êµ¬í˜„ - Max Heap
+// íŠ¹ë³„í•œ ì¼ì´ ì—†ì„ ê²½ìš°, std::priority_queueë¥¼ ì‚¬ìš©í•˜ì!
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -6,43 +8,43 @@ struct Heap {
     vector<int> heap;
     Heap() {}
 
-    // ¥Ò¡¼¥×¤ËÃÍ x ¤òÁŞÆş
+    // í™ì— ê°’ x ì‚½ì…
     void push(int x) {
-        heap.push_back(x); // ºÇ¸åÈø¤ËÁŞÆş
-        int i = (int)heap.size() - 1; // ÁŞÆş¤µ¤ì¤¿ÄºÅÀÈÖ¹æ
+        heap.push_back(x); // ë§ˆì§€ë§‰ì— ì‚½ì…
+        int i = (int)heap.size() - 1; // ì‚½ì…í•œ ê¼­ì§“ì  ë²ˆí˜¸
         while (i > 0) {
-            int p = (i - 1) / 2; // ¿Æ¤ÎÄºÅÀÈÖ¹æ
-            if (heap[p] >= x) break; // µÕÅ¾¤¬¤Ê¤±¤ì¤Ğ½ªÎ»
-            heap[i] = heap[p]; // ¼«Ê¬¤ÎÃÍ¤ò¿Æ¤ÎÃÍ¤Ë¤¹¤ë
-            i = p; // ¼«Ê¬¤Ï¾å¤Ë¹Ô¤¯
+            int p = (i - 1) / 2; // ë¶€ëª¨ ê¼­ì§“ì  ë²ˆí˜¸
+            if (heap[p] >= x) break; // ì—­ì „ì´ ì•„ë‹ˆë¼ë©´ ì¢…ë£Œ
+            heap[i] = heap[p]; // ë¶€ëª¨ì— ìê¸° ê°’ ë„£ê¸°
+            i = p; // ìœ„ë¡œ ê°€ê¸°
         }
-        heap[i] = x; // x ¤ÏºÇ½ªÅª¤Ë¤Ï¤³¤Î°ÌÃÖ¤Ë¤â¤Ã¤Æ¤¯¤ë
+        heap[i] = x; // xëŠ” ìµœì¢…ì ìœ¼ë¡œ ì´ ìœ„ì¹˜ê°€ ë¨
     }
 
-    // ºÇÂçÃÍ¤òÃÎ¤ë
+    // ìµœëŒ“ê°’
     int top() {
         if (!heap.empty()) return heap[0];
         else return -1;
     }
 
-    // ºÇÂçÃÍ¤òºï½ü
+    // ìµœëŒ“ê°’ ì‚­ì œ
     void pop() {
         if (heap.empty()) return;
-        int x = heap.back(); // ÄºÅÀ¤Ë¤â¤Ã¤Æ¤¯¤ëÃÍ
+        int x = heap.back(); // ê¼­ì§“ì ì— ê°€ì§€ê³  ì˜¬ ê°’
         heap.pop_back();
-        int i = 0; // º¬¤«¤é¹ß¤í¤·¤Æ¤¤¤¯
+        int i = 0; // ë£¨íŠ¸ì—ì„œ ì‹œì‘
         while (i * 2 + 1 < (int)heap.size()) {
-            // »ÒÄºÅÀÆ±»Î¤òÈæ³Ó¤·¤ÆÂç¤­¤¤Êı¤ò child1 ¤È¤¹¤ë
+            // ìì‹ ê¼­ì§“ì ë¼ë¦¬ ë¹„êµí•´ì„œ í° ìª½ì´ child1
             int child1 = i * 2 + 1, child2 = i * 2 + 2;
             if (child2 < (int)heap.size()
                 && heap[child2] > heap[child1]) {
                 child1 = child2;
             }
-            if (heap[child1] <= x) break; // µÕÅ¾¤¬¤Ê¤±¤ì¤Ğ½ªÎ»
-            heap[i] = heap[child1]; // ¼«Ê¬¤ÎÃÍ¤ò»ÒÄºÅÀ¤ÎÃÍ¤Ë¤¹¤ë
-            i = child1; // ¼«Ê¬¤Ï²¼¤Ë¹Ô¤¯
+            if (heap[child1] <= x) break; // ì—­ì „ì´ ì•„ë‹ˆë¼ë©´ ì¢…ë£Œ
+            heap[i] = heap[child1]; // ìì‹ì— ìê¸° ê°’ ë„£ê¸°
+            i = child1; // ì•„ë˜ë¡œ ê°€ê¸°
         }
-        heap[i] = x; // x ¤ÏºÇ½ªÅª¤Ë¤Ï¤³¤Î°ÌÃÖ¤Ë¤â¤Ã¤Æ¤¯¤ë
+        heap[i] = x; // xëŠ” ìµœì¢…ì ìœ¼ë¡œ ì´ ìœ„ì¹˜ê°€ ë¨
     }
 };
 
