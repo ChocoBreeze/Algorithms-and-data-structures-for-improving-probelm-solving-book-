@@ -1,0 +1,111 @@
+그래프는 대상의 관계를 수학적으로 표현한 것임. --> 전체 모습을 파악하기 용이함.
+그래프 중 순환하지 않는 트리를 트리라고 부름.
+이 장에서는 트리 형태를 사용한 유용한 자료 구조를 몇 가지 소개할 것임.
+
+1. 그래프
+(1) graph = vertex와 edge로 표현됨. G = (V, E)
+e = (vi, vj)로 표현함.
+꼭짓점 vi와 vj가 e로 이어져 있을 때, vi와 vj는 서로 인접한다(adjacent)고 하고, vi, vj를 e의 end(끝점)라 한다.
+그리고 변 e는 vi, vj에 접속한다(incident)고 한다.
+각 edge e에 실수 또는 정수로 가중치를 준 그래프도 있으며, 이런 그래프를 weighted graph라고 하며,
+각 변에 가중치가 없는 경우 unweighted graph라고 한다.
+
+두 vertex를 연결하는 edge가 여러 개인 경우 multi-edge(다중변)라 하며,
+ 양 끝점이 동일한 edge = (v,v)를 self-loop(자기 루프)라고 한다.
+multi-edge도 self-loop도 존재하지 않는 그래프를 simple graph(단순 그래프)라 한다.
+
+(2) undirected/directed
+방향이 있는 그래프 - directed graph(유향 그래프) --> 일방 통행 도로 등을 모델화할 때 유용함.(edge를 화살표로)
+방향이 없는 그래프 - undirected graph(무향 그래프) (edge를 그냥 선으로 그리기)
+(vi, vj)와 (vj, vi)가 동일시 되는 경우에 무향 그래프, 둘을 구별하는 경우 유향 그래프라 함.
+
+(3) walk, cycle, path(해당 정의는 책마다 다르므로 주의 바람)
+sub-graph : 원래 그래프의 일부이자 그 자신도 그래프인 것.
+s-t walk : 그래프 위의 두 vertex s, t에 대해 s에서 t를 향해 인접하는 꼭짓점을 따라가다 도달할 수 있다면 그 경로를 s-t walk라 함. (s-t path라고도 한다)
+이 때, s를 시작점이라 하고, t를 종점이라 한다.
+walk 중에서 시작점과 종점이 같은 것을 cycle 또는 closed path라 함.
+그리고 walk 중에서 특히 같은 꼭짓점을 두 번 이상 통과하지 않는 것을 path라고 합니다.
+
+walk, cycle, path의 length는 weighted graph의 경우 가중치 합을, unweighted graph의 경우 edge의 개수를 의미함.
+14장 --> 최단 경로 문제를 다룸.
+
+(4)연결성.
+무향 그래프 G에서 임의의 두 꼭짓점 s, t에 대해 s-t 패스가 존재하면 G는 연결(connected)이라고 함.
+이 때 G를 구성하는 각각의 연결 그래프를 G의 연결 요소(connected component)라고 함.
+강연결 : s-t 패스와 t-s 패스가 모두 존재하는 것으로 정의 가능.
+
+2. 그래프를 사용하는 공식화 예시
+-Social Network
+-교통 네트워크 --> planar graph(그래프 G를 어떤 두 변도 교차하지 않도록 평면에 그릴 수 있을 때)
+-게임 국면 전이
+-작업 의존 관계(어떤 작업이 안 끝나면 시작할 수 없는 작업 처리)
+
+3. 그래프 구현 (10_3)
+그래프를 나타내는 자료 구조로는 다음 두 가지가 대표적임
+-adjacency-list representation(인접 리스트) --> 효율적인 알고리즘을 설계 가능한 경우가 많음. --> std::vector를 사용하면 충분함.
+-adjacency-matrix representation(인접 행렬)
+
+4. 가중 그래프 구현 (10_4)
+가중치 변을 나타내는 구조체 Edge 사용(인접 꼭짓점 변호와 가중치 정보를 멤버 변수로 저장함)
+
+5. 트리
+이 교재에서 트리는 무향 그래프로 생각함.
+G = (V, E)가 tree라면 G가 연결이면서 사이클이 없다는 것을 뜻함.
+(1) rooted tree
+root를 가진 트리
+leaf / parent / child...
+sibling : 같은 부모 노드를 가진 vertex
+
+(2) 부분 트리와 트리 높이
+subtree(각 vertex v에 대해 v에서 자식 vertex 방향으로만 주목) -> 부분 트리에서 v 이외의 꼭짓점을 descendant(후손)이라 함.
+또한, 루트 트리에 있는 두 꼭짓점 u, v를 지정하면 u-v path는 단 하나로 정해짐(unrooted tree도 성립)
+또한, 루트 트리의 각 꼭짓점 v에 대해 루트와 v를 연결하는 path 길이를 꼭짓점 v의 깊이(depth)라 함.
+편의상 root의 깊이는 0이라 함, 루트 트리에서 가장 먼 꼭짓점까지의 깊이는 트리의 height(높이)라 함.
+
+6. 순서 트리와 이진 트리
+root tree 구조 --> Heap, binary search tree, Union-Find
+(1) 순서 트리와 이진 트리
+root tree에서 각 꼭짓점 v의 자식 꼭짓점 순서를 고려할 경우, ordered tree(순서 트리)라 함. - 형제 상에 형과 동생을 구분함.
+순서 트리를 표현하는 방법은 다양함.
+
+순서 트리 중에서 모든 꼭짓점에 대해 자식 꼭짓점이 최대 k개인 경우 k진 트리(k-ary tree)라고 하며,
+k=1인 경우 연결 리스트와 일치.
+k=2인 경우 특별히 binary tree라 한다.
+
+binary tree(이진트리)에서 왼쪽 자식 꼭짓점을 루트로 하는 부분 트리를 left subtree, 오른쪽 자식 꼭짓점을 루트로 하는 부분 트리를 right subtree라 함.
+이진 트리를 사용하는 자료 구조로는 Heap, Binary Search Tree등이 있다.
+
+(2) 강균형 이진 트리
+트리의 쿼리 복잡도는 대부분 O(h)로 트리의 높이를 따르며, 트리의 높이를 줄이는 게 관건임.
+트리의 vertex 수를 N개라 했을 때, 최대 높이는 N-1임.
+좌우로 균등하게 뻗는 트리가 무척 유용함.
+-Strong balanced binary tree : 이진 트리이면서 모든 리프의 깊이 차이가 1이하인 것.
+	vertex 수가 N개 일 때, 높이는 O(logN)임.
+	예시로 complete binary tree(모든 리프 깊이가 동일한 이진 트리)를 들 수 있음.
+
+7. 이진 트리를 사용한 자료 구조 예(1) : Heap (10_5)
+각 꼭짓점(vertex) v가 가진 key라고 부르는 값 key[v]에 대해 다음 조건을 만족해야 함.
+	v의 부모 p에 대해 key[p] >= key[v]가 성립함.
+	트리 높이를 h라 할 때 트리 깊이 h - 1 이하 부분은 완전(complete) 이진 트리(모든 리프 깊이가 동일)가 형성됨
+	트리 높이를 h라 할 때 트리 깊이 h 부분은 꼭짓점이 왼쪽으로 몰려 있다.
+따라서 Heap은 강균형 이진 트리임.
+삽입, 최대값 삭제 - O(logN)
+최대값 획득 - O(1)
+Heap은 검색에는 효과적이지 않으므로, 값 검색과 최댓값 취득이 모두 중요한 경우 balanced binary search tree를 쓰는 것이 좋음.
+
+배열을 통해 Heap 구현 가능
+자식 vertex --> 2k+1, 2k+2 / 부모 vertex --> floor(k-1)
+
+힙 구현은 가능하나 --> std::priority_queue를 이용하길 권장함.
+
+O(N)으로 Heap 구축 --> 12.6절의 Heap Sort를 참조
+
+8. 이진 트리를 사용하는 자료 구조 예(2) : Binary Search Tree(이진 탐색 트리)
+삽입 / 삭제 / 검색이 가능
+각 꼭짓점 v가 key를 가질 때, 다음 조건을 만족해야 함.
+임의의 꼭짓점 v에 대해, v의 왼쪽 부분 트리에 포함된 모든 꼭짓점 v'에 대해 key[v] >= key[v']이고
+v의 오른쪽 부분 트리에 포함된 모든 꼭짓점 v'에 대해 key[v] <= key[v']이여야 함.
+자가 균형 이진 탐색 트리의 경우 O(logN)에 모든 기능을 수행 가능. --> 상수 부분이 무척 크므로 Heap으로 충분하다면 Heap을 사용하는 것이 간편함.
+
+자가 균형 이진 탐색 트리의 구현 방법으로는 Red-Black Tree, AVL Tree, B-Tree, splay tree, treap 등 많은 방법이 존재하며,
+std::set이나 std::map은 red-black tree로 구현된 경우가 많다.
