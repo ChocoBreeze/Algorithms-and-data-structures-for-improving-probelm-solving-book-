@@ -1,4 +1,4 @@
-// insertion sort
+// insertion sort - O(N^2)
 #include <iostream>
 #include <vector>
 using namespace std;
