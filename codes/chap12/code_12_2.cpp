@@ -1,33 +1,35 @@
+// merge sort
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// ÇÛÎó a ¤Î¶è´Ö [left, right) ¤ò¥½¡¼¥È¤¹¤ë
-// [left, right) ¤Ï¡¤left, left+1, ..., right-1 ÈÖÌÜ¤òÉ½¤¹
+// ë°°ì—´ aì˜ êµ¬ê°„ [left, right)ë¥¼ ì •ë ¬í•˜ê¸°
+// [left, right)ëŠ” left, left+1, ..., right-1ë¥¼ ëœ»í•¨
 void MergeSort(vector<int> &a, int left, int right) {
     if (right - left == 1) return;
     int mid = left + (right - left) / 2;
 
-    // º¸È¾Ê¬ [left, mid) ¤ò¥½¡¼¥È
+    // ì™¼ìª½ ë°˜ìª½ [left, mid) ì •ë ¬
     MergeSort(a, left, mid);
 
-    // ±¦È¾Ê¬ [mid, right) ¤ò¥½¡¼¥È
+    // ì˜¤ë¥¸ìª½ ë°˜ìª½ [mid, right) ì •ë ¬
     MergeSort(a, mid, right);
 
-    // ¤¤¤Ã¤¿¤ó¡Öº¸¡×¤È¡Ö±¦¡×¤Î¥½¡¼¥È·ë²Ì¤ò¥³¥Ô¡¼¤·¤Æ¤ª¤¯ (±¦Â¦¤Ïº¸±¦È¿Å¾)
+    // ì¼ë‹¨ ì™¼ìª½ê³¼ ì˜¤ë¥¸ìª½ ì •ë ¬ ê²°ê³¼ë¥¼ ë³µì‚¬í•´ ë‘ (ì˜¤ë¥¸ìª½ì€ ì¢Œìš°ë°˜ì „)
     vector<int> buf;
     for (int i = left; i < mid; ++i) buf.push_back(a[i]);
     for (int i = right - 1; i >= mid; --i) buf.push_back(a[i]);
 
-    // Ê»¹ç¤¹¤ë
-    int index_left = 0;                    // º¸Â¦¤ÎÅº»ú
-    int index_right = (int)buf.size() - 1; // ±¦Â¦¤ÎÅº»ú
+    // ë³‘í•©í•˜ê¸°
+    // bufì˜ ì–‘ìª½ ë ê°’ì´ ìµœì†Œê°’ í›„ë³´ë“¤ì´ë¯€ë¡œ í•´ë‹¹ ê°’ ë“¤ì„ ë¹„êµí•´ ê¸°ì¡´ ë°°ì—´ì— ë„£ê¸°
+    int index_left = 0;                    // ì™¼ìª½ ì¸ë±ìŠ¤
+    int index_right = (int)buf.size() - 1; // ì˜¤ë¥¸ìª½ ì¸ë±ìŠ¤
     for (int i = left; i < right; ++i) {
-        // º¸Â¦ºÎÍÑ
+        // ì™¼ìª½ ì±„ìš©
         if (buf[index_left] <= buf[index_right]) {
             a[i] = buf[index_left++];
         }
-        // ±¦Â¦ºÎÍÑ
+        // ì˜¤ë¥¸ìª½ ì±„ìš©
         else {
             a[i] = buf[index_right--];
         }
@@ -35,12 +37,12 @@ void MergeSort(vector<int> &a, int left, int right) {
 }
 
 int main() {
-    // ÆşÎÏ
-    int N; // Í×ÁÇ¿ô
+    // ì…ë ¥
+    int N; // ìš”ì†Œ ê°œìˆ˜
     cin >> N;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
 
-    // ¥Ş¡¼¥¸¥½¡¼¥È
+    // ë³‘í•© ì •ë ¬
     MergeSort(a, 0, N);
 }
