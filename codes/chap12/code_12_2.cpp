@@ -1,4 +1,4 @@
-// merge sort(ONlogN)
+// merge sort - O(NlogN)
 #include <iostream>
 #include <vector>
 using namespace std;
