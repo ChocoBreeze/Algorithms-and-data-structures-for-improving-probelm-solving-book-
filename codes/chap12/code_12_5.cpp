@@ -1,31 +1,31 @@
+// Bucket Sort
 #include <iostream>
 #include <vector>
 using namespace std;
 
-const int MAX = 100000; // ¤³¤³¤Ç¤ÏÇÛÎó¤ÎÃÍ¤Ï 100000 Ì¤Ëş¤È¤¹¤ë
+const int MAX = 100000; // ë°°ì—´ì— 100000 ë¯¸ë§Œ ê°’ë§Œ ì¡´ì¬í•œë‹¤ê³  ê°€ì •
 
-// ¥Ğ¥±¥Ã¥È¥½¡¼¥È
 void BucketSort(vector<int> &a) {
     int N = (int)a.size();
-    
-    // ³ÆÍ×ÁÇ¤Î¸Ä¿ô¤ò¥«¥¦¥ó¥È¤¹¤ë
-    // num[v]: v ¤Î¸Ä¿ô
+
+    // ê° ìš”ì†Œ ê°œìˆ˜ë¥¼ ì¹´ìš´íŠ¸í•¨
+    // num[v]: v ê°œìˆ˜
     vector<int> num(MAX, 0);
     for (int i = 0; i < N; ++i) {
-        ++num[a[i]]; // a[i] ¤ò¥«¥¦¥ó¥È¤¹¤ë
+        ++num[a[i]]; // a[i]ë¥¼ ì¹´ìš´íŠ¸
     }
 
-    // num ¤ÎÎßÀÑÏÂ¤ò¤È¤ë
-    // sum[v]: v °Ê²¼¤ÎÃÍ¤Î¸Ä¿ô
-    // ÃÍ a[i] ¤¬Á´ÂÎ¤ÎÃæ¤Ç²¿ÈÖÌÜ¤Ë¾®¤µ¤¤¤«¤òµá¤á¤ë
+    // num ëˆ„ì í•©
+    // sum[v]: v ì´í•˜ ê°’ ê°œìˆ˜
+    // a[i]ê°€ ì „ì²´ì—ì„œ ëª‡ ë²ˆì§¸ë¡œ ì‘ì€ ê°’ì¸ì§€ êµ¬í•˜ê¸°
     vector<int> sum(MAX, 0);
     sum[0] = num[0];
     for (int v = 1; v < MAX; ++v) {
         sum[v] = sum[v - 1] + num[v];
     }
 
-    // sum ¤ò¤â¤È¤Ë¥½¡¼¥È½èÍı
-    // a2: a ¤ò¥½¡¼¥È¤·¤¿¤â¤Î
+    // sumë¥¼ ë°”íƒ•ìœ¼ë¡œ ì •ë ¬
+    // a2: aë¥¼ ì •ë ¬í•œ ê²ƒ
     vector<int> a2(N);
     for (int i = N - 1; i >= 0; --i) {
         a2[--sum[a[i]]] = a[i];
@@ -34,12 +34,12 @@ void BucketSort(vector<int> &a) {
 }
 
 int main() {
-    // ÆşÎÏ
-    int N; // Í×ÁÇ¿ô
+    // ì…ë ¥
+    int N; // ìš”ì†Œ ê°œìˆ˜
     cin >> N;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
 
-    // ¥Ğ¥±¥Ã¥È¥½¡¼¥È
+    // ë²„í‚· ì •ë ¬
     BucketSort(a);
 }
