@@ -1,36 +1,37 @@
+// Quick Sort - O(NlogN)
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// «€ŒÛ a §Œ∂Ë¥÷ [left, right) §Ú•Ω°º•»§π§Î
-// [left, right) §œ°§left, left+1, ..., right-1 »÷Ã‹§Ú…Ω§π
+// Î∞∞Ïó¥ a Íµ¨Í∞Ñ [left, right)Î•º Ï†ïÎ†¨
+// [left, right) „ÅØÔºåleft, left+1, ..., right-1Î≤àÏß∏Î•º ÎúªÌï®
 void QuickSort(vector<int> &a, int left, int right) {
     if (right - left <= 1) return;
 
-    int pivot_index = (left + right) / 2;  // ≈¨≈ˆ§À§≥§≥§«§œ√Ê≈¿§»§∑§ﬁ§π
+    int pivot_index = (left + right) / 2;  // Ï†ÅÎãπÌûà Í∞ÄÏö¥Îç∞ Í∞íÏùÑ Í≥†Î¶Ñ
     int pivot = a[pivot_index];
-    swap(a[pivot_index], a[right - 1]);    // pivot §»±¶√º§Ú swap
+    swap(a[pivot_index], a[right - 1]);    // pivotÍ≥º Ïò§Î•∏Ï™Ω ÎÅùÏùÑ ÏÑúÎ°ú Î∞îÍøà
 
-    int i = left; // i §œ∫∏µÕ§·§µ§Ï§ø pivot Ã§À˛Õ◊¡«§Œ±¶√º§Ú…Ω§π
+    int i = left; // iÎäî ÏôºÏ™ΩÏóê Ï±ÑÏö¥ pivot ÎØ∏Îßå ÏöîÏÜåÏùò Ïò§Î•∏Ï™Ω ÎÅùÏùÑ ÎúªÌï®
     for (int j = left; j < right - 1; ++j) {
-        if (a[j] < pivot) { // pivot Ã§À˛§Œ§‚§Œ§¨§¢§√§ø§È∫∏§ÀµÕ§·§∆§§§Ø
+        if (a[j] < pivot) { // pivot ÎØ∏ÎßåÏù¥ÎùºÎ©¥ ÏôºÏ™ΩÏóê Ï±ÑÏõÄ
             swap(a[i++], a[j]);
         }
     }
-    swap(a[i], a[right - 1]); // pivot §Ú≈¨¿⁄§ æÏΩÍ§À¡ﬁ∆˛
+    swap(a[i], a[right - 1]); // pivotÏùÑ Ï†ÅÏ†àÌïú Ïû•ÏÜåÏóê ÏÇΩÏûÖ
 
-    // ∫∆µ¢≈™§À≤Ú§Ø
-    QuickSort(a, left, i);    // ∫∏»æ ¨ (pivot Ã§À˛)
-    QuickSort(a, i + 1, right); // ±¶»æ ¨ (pivot ∞ æÂ)
+    // Ïû¨Í∑ÄÏ†ÅÏúºÎ°ú ÌíÄÍ∏∞
+    QuickSort(a, left, i);    // ÏôºÏ™Ω Î∞ò(pivot ÎØ∏Îßå)
+    QuickSort(a, i + 1, right); // Ïò§Î•∏Ï™Ω Î∞ò(pivot Ïù¥ÏÉÅ)
 }
 
 int main() {
-    // ∆˛Œœ
-    int N; // Õ◊¡«øÙ
+    // ÏûÖÎ†•
+    int N; // ÏöîÏÜå Í∞úÏàò
     cin >> N;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
 
-    // •Ø•§•√•Ø•Ω°º•»
+    // ÌÄµ Ï†ïÎ†¨
     QuickSort(a, 0, N);
 }
