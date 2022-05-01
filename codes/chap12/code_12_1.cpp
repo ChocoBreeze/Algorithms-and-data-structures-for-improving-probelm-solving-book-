@@ -1,32 +1,32 @@
+// insertion sort
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// ÇÛÎó a ¤ò¥½¡¼¥È¤¹¤ë
+// ë°°ì—´ aë¥¼ ì •ë ¬í•¨
 void InsertionSort(vector<int> &a) {
     int N = (int)a.size();
     for (int i = 1; i < N; ++i) {
-        int v = a[i]; // ÁÞÆþ¤·¤¿¤¤ÃÍ
+        int v = a[i]; // ì‚½ìž…í•˜ê³  ì‹¶ì€ ê°’
 
-        // v ¤òÁÞÆþ¤¹¤ëÅ¬ÀÚ¤Ê¾ì½ê j ¤òÃµ¤¹
+        // vë¥¼ ì‚½ìž…í•  ì ì ˆí•œ ìž¥ì†Œ jë¥¼ ì°¾ê¸°
         int j = i;
         for (; j > 0; --j) {
-            if (a[j-1] > v) { // v ¤è¤êÂç¤­¤¤¤â¤Î¤Ï 1 ¤Ä¸å¤í¤Ë°Ü¤¹
+            if (a[j-1] > v) { // vë³´ë‹¤ í¬ë©´ í•œ ì¹¸ ë’¤ë¡œ ì´ë™
                 a[j] = a[j-1];
             }
-            else break; // v °Ê²¼¤Ë¤Ê¤Ã¤¿¤é»ß¤á¤ë
+            else break; // vì´í•˜ì¸ ê²½ìš° ë©ˆì¶¤
         }
-        a[j] = v; // ºÇ¸å¤Ë j ÈÖÌÜ¤Ë v ¤ò¤â¤Ã¤Æ¤¯¤ë
+        a[j] = v; // ë§ˆì§€ë§‰ìœ¼ë¡œ kë²ˆì§¸ë¡œ vë¥¼ ê°€ì ¸ê°
     }
 }
 
 int main() {
-    // ÆþÎÏ
-    int N; // Í×ÁÇ¿ô
+    int N; // ë°°ì—´ ì›ì†Œ ê°œìˆ˜
     cin >> N;
     vector<int> a(N);
     for (int i = 0; i < N; ++i) cin >> a[i];
 
-    // ÁÞÆþ¥½¡¼¥È
+    // ì‚½ìž…ì •ë ¬
     InsertionSort(a);
 }
