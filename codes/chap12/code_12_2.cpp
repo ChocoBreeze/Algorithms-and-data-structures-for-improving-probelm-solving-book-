@@ -1,4 +1,4 @@
-// merge sort
+// merge sort(ONlogN)
 #include <iostream>
 #include <vector>
 using namespace std;
