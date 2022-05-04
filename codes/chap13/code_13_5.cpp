@@ -1,35 +1,37 @@
+// bipartite graph(ì´ë¶„ ê·¸ë˜í”„) íŒì • - DFS
+// ê¼­ì§“ì ì— ìƒ‰ì¹ í•´ê°€ë©´ì„œ ì´ë¶„ ê·¸ë˜í”„ íŒì •
 #include <iostream>
 #include <vector>
 using namespace std;
 using Graph = vector<vector<int>>;
 
-// ÆóÉô¥°¥é¥ÕÈ½Äê
+// ì´ë¶„ ê·¸ë˜í”„ íŒì •
 vector<int> color;
 bool dfs(const Graph &G, int v, int cur = 0) {
     color[v] = cur;
     for (auto next_v : G[v]) {
-        // ÎÙÀÜÄºÅÀ¤¬¤¹¤Ç¤Ë¿§³ÎÄê¤·¤Æ¤¤¤¿¾ì¹ç
+        // ì¸ì ‘ ê¼­ì§“ì ì´ ì´ë¯¸ ìƒ‰ìƒì´ ì •í•´ì§„ ê²½ìš°
         if (color[next_v] != -1) {
-            // Æ±¤¸¿§¤¬ÎÙÀÜ¤·¤¿¾ì¹ç¤ÏÆóÉô¥°¥é¥Õ¤Ç¤Ï¤Ê¤¤
+            // ê°™ì€ ìƒ‰ì´ ì¸ì ‘í•˜ë©´ ì´ë¶„ ê·¸ë˜í”„ê°€ ì•„ë‹˜
             if (color[next_v] == cur) return false;
 
-            // ¿§¤¬³ÎÄê¤·¤¿¾ì¹ç¤Ë¤ÏÃµº÷¤·¤Ê¤¤
+            // ë‹¤ë¥¸ ìƒ‰ìƒì´ ì •í•´ì ¸ ìˆìœ¼ë©´ íƒìƒ‰í•˜ì§€ ì•ŠìŒ
             continue;
         }
 
-        // ÎÙÀÜÄºÅÀ¤Î¿§¤òÊÑ¤¨¤Æ¡¢ºÆµ¢Åª¤ËÃµº÷
-        // false ¤¬ÊÖ¤Ã¤Æ¤­¤¿¤é false ¤òÊÖ¤¹
+        // ì¸ì ‘ ê¼­ì§“ì  ìƒ‰ì„ ë°”ê¾¸ê³  ì¬ê·€ì ìœ¼ë¡œ íƒìƒ‰
+        // falseê°€ ë°˜í™˜ë˜ë©´ falseë¥¼ ëŒë ¤ì£¼ê¸°
         if (!dfs(G, next_v , 1 - cur)) return false;
     }
     return true;
 }
 
 int main() {
-    // ÄºÅÀ¿ô¤ÈÊÕ¿ô
+    // ê¼­ì§“ì  ê°œìˆ˜ì™€ ë³€ ê°œìˆ˜
     int N, M;
     cin >> N >> M;
 
-    // ¥°¥é¥ÕÆşÎÏ¼õ¼è
+    // ê·¸ë˜í”„ ì…ë ¥
     Graph G(N);
     for (int i = 0; i < M; ++i) {
         int a, b;
@@ -38,11 +40,11 @@ int main() {
         G[b].push_back(a);
     }
 
-    // Ãµº÷
+    // íƒìƒ‰
     color.assign(N, -1);
     bool is_bipartite = true;
     for (int v = 0; v < N; ++v) {
-        if (color[v] != -1) continue; // v ¤¬Ãµº÷ºÑ¤ß¤Î¾ì¹ç¤ÏÃµº÷¤·¤Ê¤¤
+        if (color[v] != -1) continue; // vë¥¼ ì´ë¯¸ íƒìƒ‰í–ˆìœ¼ë©´ íƒìƒ‰í•˜ì§€ ì•ŠìŒ
         if (!dfs(G, v)) is_bipartite = false;
     }
 
