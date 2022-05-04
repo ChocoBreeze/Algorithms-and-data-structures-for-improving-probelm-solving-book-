@@ -1,34 +1,35 @@
+// 루트 없는 트리를 루트 트리로 만들 때 각 꼭짓점 깊이와 부분 트리 크기(부분 트리에 포함된 꼭짓점 개수) 구하기
 #include <iostream>
 #include <vector>
 using namespace std;
 using Graph = vector<vector<int>>;
 
-// �ھ��õ��
+// 트리 탐색
 vector<int> depth;
 vector<int> subtree_size;
 void dfs(const Graph &G, int v, int p = -1, int d = 0) {
     depth[v] = d;
     for (auto c : G[v]) {
-        if (c == p) continue; // õ�����������ص�ή����Τ��ɤ�
+        if (c == p) continue; // 탐색이 부모 방향으로 역류하는 걸 방지
         dfs(G, c, v, d + 1);
     }
 
-    // ���꤬�����ˡ���ʬ�ڥ����������
-    subtree_size[v] = 1; // ��ʬ����
+    // 후위 순회시 부분 트리 크기를 구하기 - 동적 계획법
+    subtree_size[v] = 1; // 자기 자신 
     for (auto c : G[v]) {
         if (c == p) continue;
 
-        // ��ĺ���򺬤Ȥ�����ʬ���Υ�������û�����
-        subtree_size[v] += subtree_size[c]; 
+        // 자식 꼭짓점을 루트로 하는 부분 트리 크기를 더하기
+        subtree_size[v] += subtree_size[c];
     }
 }
 
 int main() {
-    // ĺ���� (�ڤʤΤ��տ��� N - 1 �ǳ���)
-    int N; 
+    // 꼭짓점 개수(트리이므로 변 개수는 N -1)
+    int N;
     cin >> N;
 
-    // ��������ϼ���
+    // 그래프 입력
     Graph G(N);
     for (int i = 0; i < N - 1; ++i) {
         int a, b;
@@ -37,13 +38,13 @@ int main() {
         G[b].push_back(a);
     }
 
-    // õ��
-    int root = 0; // ����ĺ�� 0 �򺬤Ȥ���
+    // 탐색
+    int root = 0; // 일단 꼭짓점 0을 루트로 삼음
     depth.assign(N, 0);
     subtree_size.assign(N, 0);
     dfs(G, root);
 
-    // ���
+    // 결과
     for (int v = 0; v < N; ++v) {
         cout << v << ": depth = " << depth[v]
         << ", subtree_size = " << subtree_size[v] << endl;
