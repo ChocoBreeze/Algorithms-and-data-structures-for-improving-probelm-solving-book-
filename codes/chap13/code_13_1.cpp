@@ -26,7 +26,7 @@ void search(const Graph& G, int s) {
 
 		// v에서 갈 수 있는 꼭짓점 모두 조사
 		for (int x : G[v]) {
-			// 이미 발견한 꼭짓점은 탐색 x
+			// 이미 발견한 꼭짓점은 탐색 x --> 이 부분이 없다면 사이클이 있는 경우에 무한 
 			if (seen[x]) continue;
 
 			// 새로운 꼭짓점 x를 이미 탐색한 꼭짓점으로 todo에 삽입
