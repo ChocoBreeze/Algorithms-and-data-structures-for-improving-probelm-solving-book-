@@ -1,3 +1,5 @@
+// Kruskal algorithm 
+// 11ì¥ì˜ Union-Find ì´ìš©
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -7,74 +9,75 @@ using namespace std;
 struct UnionFind {
     vector<int> par, siz;
 
-    // ½é´ü²½
+    // ì´ˆê¸°í™”
     UnionFind(int n) : par(n, -1) , siz(n, 1) { }
-    
-    // º¬¤òµá¤á¤ë
+
+    // ë£¨íŠ¸ êµ¬í•˜ê¸°
     int root(int x) {
-        if (par[x] == -1) return x; // x ¤¬º¬¤Î¾ì¹ç¤Ï x ¤òÊÖ¤¹
+        if (par[x] == -1) return x; // xê°€ ë£¨íŠ¸ë¼ë©´ xë¥¼ ë°˜í™˜
         else return par[x] = root(par[x]);
     }
 
-    // x ¤È y ¤¬Æ±¤¸¥°¥ë¡¼¥×¤ËÂ°¤¹¤ë¤«¤É¤¦¤« (º¬¤¬°ìÃ×¤¹¤ë¤«¤É¤¦¤«)
+    // xì™€ yê°€ ê°™ì€ ê·¸ë£¹ì— ì†í•˜ëŠ”ì§€ ì—¬ë¶€(ë£¨íŠ¸ê°€ ì¼ì¹˜í•˜ëŠ”ì§€ ì—¬ë¶€)
     bool issame(int x, int y) {
         return root(x) == root(y);
     }
 
-    // x ¤ò´Ş¤à¥°¥ë¡¼¥×¤È y ¤ò´Ş¤à¥°¥ë¡¼¥×¤È¤òÊ»¹ç¤¹¤ë
+    // xë¥¼ í¬í•¨í•˜ëŠ” ê·¸ë£¹ê³¼ yë¥¼ í¬í•¨í•˜ëŠ” ê·¸ë£¹ ë³‘í•©í•˜ê¸°
     bool unite(int x, int y) {
-        // x, y ¤ò¤½¤ì¤¾¤ìº¬¤Ş¤Ç°ÜÆ°¤¹¤ë
+        // x, yë¥¼ ê°ê° ë£¨íŠ¸ê¹Œì§€ ì´ë™ì‹œí‚´
         x = root(x);
         y = root(y);
 
-        // ¤¹¤Ç¤ËÆ±¤¸¥°¥ë¡¼¥×¤Î¤È¤­¤Ï²¿¤â¤·¤Ê¤¤
-        if (x == y) return false; 
+        // ì´ë¯¸ ê°™ì€ ê·¸ë£¹ì´ë¼ë©´ ì•„ë¬´ ê²ƒë„ ì•ˆí•¨
+        if (x == y) return false;
 
-        // union by size (y Â¦¤Î¥µ¥¤¥º¤¬¾®¤µ¤¯¤Ê¤ë¤è¤¦¤Ë¤¹¤ë)
+        // union by size(yìª½ í¬ê¸°ê°€ ì‘ì•„ì§€ë„ë¡ ë§Œë“¬)
         if (siz[x] < siz[y]) swap(x, y);
 
-        // y ¤ò x ¤Î»Ò¤È¤¹¤ë
+        // yë¥¼ xì˜ ìì‹ìœ¼ë¡œ ë§Œë“¬
         par[y] = x;
         siz[x] += siz[y];
         return true;
     }
 
-    // x ¤ò´Ş¤à¥°¥ë¡¼¥×¤Î¥µ¥¤¥º
+    // xë¥¼ í¬í•¨í•˜ëŠ” ê·¸ë£¹ í¬ê¸°
     int size(int x) {
         return siz[root(x)];
     }
 };
 
-// ÊÕ e = (u, v) ¤ò {w(e), {u, v}} ¤ÇÉ½¤¹
+// ë³€ e = (u, v)ë¥¼ {w(e), {u, v}}ë¡œ í‘œí˜„í•¨
 using Edge = pair<int, pair<int,int>>;
 
 int main() {
-    // ÆşÎÏ
-    int N, M; // ÄºÅÀ¿ô¤ÈÊÕ¿ô
+    // ì…ë ¥
+    int N, M; // ê¼­ì§“ì  ê°œìˆ˜ì™€ ë³€ ê°œìˆ˜
     cin >> N >> M;
-    vector<Edge> edges(M); // ÊÕ½¸¹ç
+    vector<Edge> edges(M); // ë³€ ì§‘í•©
     for (int i = 0; i < M; ++i) {
-        int u, v, w; // w ¤Ï½Å¤ß
+        int u, v, w; // wëŠ” ê°€ì¤‘ì¹˜
         cin >> u >> v >> w;
         edges[i] = Edge(w, make_pair(u, v));
     }
 
-    // ³ÆÊÕ¤ò¡¤ÊÕ¤Î½Å¤ß¤¬¾®¤µ¤¤½ç¤Ë¥½¡¼¥È¤¹¤ë
-    // pair ¤Ï¥Ç¥Õ¥©¥ë¥È¤Ç (Âè°ìÍ×ÁÇ, ÂèÆóÍ×ÁÇ) ¤Î¼­½ñ½çÈæ³Ó
+    // ê° ë³€ì„ ë³€ì˜ ê°€ì¤‘ì¹˜ê°€ ì‘ì€ ìˆœì„œë¡œ ì •ë ¬
+    // pairëŠ” ê¸°ë³¸ê°’ìœ¼ë¡œ(ì²« ë²ˆì§¸ ìš”ì†Œ, ë‘ ë²ˆì§¸ ìš”ì†Œ) ì‚¬ì „ìˆœìœ¼ë¡œ ë¹„êµ
+    // ì •ë ¬ -> O(|E|log|V|)
     sort(edges.begin(), edges.end());
 
-    // ¥¯¥é¥¹¥«¥ëË¡
+    // í¬ëŸ¬ìŠ¤ì»¬ ì•Œê³ ë¦¬ì¦˜
     long long res = 0;
     UnionFind uf(N);
-    for (int i = 0; i < M; ++i) {
+    for (int i = 0; i < M; ++i) { // O(|E|alpha(|V|))
         int w = edges[i].first;
         int u = edges[i].second.first;
         int v = edges[i].second.second;
 
-        // ÊÕ (u, v) ¤ÎÄÉ²Ã¤Ë¤è¤Ã¤Æ¥µ¥¤¥¯¥ë¤¬·ÁÀ®¤µ¤ì¤ë¤È¤­¤ÏÄÉ²Ã¤·¤Ê¤¤
+        // ë³€ (u, v) ì¶”ê°€ë¡œ ì‚¬ì´í´ì´ í˜•ì„±ë˜ë©´ ì¶”ê°€í•˜ì§€ ì•ŠìŒ
         if (uf.issame(u, v)) continue;
 
-        // ÊÕ (u, v) ¤òÄÉ²Ã¤¹¤ë
+        // ë³€ (u, v)ë¥¼ ì¶”ê°€í•˜ê¸°
         res += w;
         uf.unite(u, v);
     }
