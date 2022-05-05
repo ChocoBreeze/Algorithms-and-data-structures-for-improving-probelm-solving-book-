@@ -1,22 +1,24 @@
+// Dijkstra - Heapìœ¼ë¡œ êµ¬í˜„(O(|E|log|V|)) --> í¬ì†Œ ê·¸ë˜í”„ì¼ ê²½ìš° ìœ ìš©í•˜ë‹¤!
+// min heap -- priority_queueë¥¼ ì´ìš©í•¨.
 #include <iostream>
 #include <vector>
 #include <queue>
 using namespace std;
 
-// Ìµ¸ÂÂç¤òÉ½¤¹ÃÍ (¤³¤³¤Ç¤Ï 2^60 ¤È¤¹¤ë)
+// ë¬´í•œëŒ€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ê°’(ì—¬ê¸°ì„œëŠ” 2^60)
 const long long INF = 1LL << 60;
 
-// ÊÕ¤òÉ½¤¹·¿¡¤¤³¤³¤Ç¤Ï½Å¤ß¤òÉ½¤¹·¿¤ò long long ·¿¤È¤·¤Ş¤¹
+// ë³€ì„ ë‚˜íƒ€ë‚´ëŠ” ìë£Œí˜•. ê°€ì¤‘ì¹˜ ìë£Œí˜•ì€ long long
 struct Edge {
-    int to; // ÎÙÀÜÄºÅÀÈÖ¹æ
-    long long w; // ½Å¤ß
+    int to; // ì¸ì ‘ ê¼­ì§“ì  ë²ˆí˜¸
+    long long w; // ê°€ì¤‘ì¹˜
     Edge(int to, long long w) : to(to), w(w) {}
 };
 
-// ½Å¤ßÉÕ¤­¥°¥é¥Õ¤òÉ½¤¹·¿
+// ê°€ì¤‘ ê·¸ë˜í”„ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìë£Œí˜•
 using Graph = vector<vector<Edge>>;
 
-// ´ËÏÂ¤ò¼Â»Ü¤¹¤ë´Ø¿ô
+// ì™„í™”ë¥¼ ì‹¤ì‹œí•˜ëŠ” í•¨ìˆ˜
 template<class T> bool chmin(T& a, T b) {
     if (a > b) {
         a = b;
@@ -26,11 +28,11 @@ template<class T> bool chmin(T& a, T b) {
 }
 
 int main() {
-    // ÄºÅÀ¿ô¡¤ÊÕ¿ô¡¤»ÏÅÀ
+    // ê¼­ì§“ì  ê°œìˆ˜, ë³€ ê°œìˆ˜, ì‹œì‘ì 
     int N, M, s;
     cin >> N >> M >> s;
 
-    // ¥°¥é¥Õ
+    // ê·¸ë˜í”„
     Graph G(N);
     for (int i = 0; i < M; ++i) {
         int a, b, w;
@@ -38,37 +40,38 @@ int main() {
         G[a].push_back(Edge(b, w));
     }
 
-    // ¥À¥¤¥¯¥¹¥È¥éË¡
+    // ë‹¤ìµìŠ¤íŠ¸ë¼ ì•Œê³ ë¦¬ì¦˜
     vector<long long> dist(N, INF);
     dist[s] = 0;
 
-    // (d[v], v) ¤Î¥Ú¥¢¤òÍ×ÁÇ¤È¤·¤¿¥Ò¡¼¥×¤òºî¤ë
+    // (d[v], v) ìŒì„ ìš”ì†Œë¡œ í•˜ëŠ” í™ì„ ì‘ì„±
     priority_queue<pair<long long, int>,
                    vector<pair<long long, int>>,
-                   greater<pair<long long, int>>> que;
+                   greater<pair<long long, int>>> que; // min_heap
     que.push(make_pair(dist[s], s));
 
-    // ¥À¥¤¥¯¥¹¥È¥éË¡¤ÎÈ¿Éü¤ò³«»Ï
+    // ë‹¤ìµìŠ¤íŠ¸ë¼ ì•Œê³ ë¦¬ì¦˜ ë°˜ë³µì„ ì‹œì‘
     while (!que.empty()) {
-        // v: »ÈÍÑºÑ¤ß¤Ç¤Ê¤¤ÄºÅÀ¤Î¤¦¤Á d[v] ¤¬ºÇ¾®¤ÎÄºÅÀ
-        // d: v ¤ËÂĞ¤¹¤ë¥­¡¼ÃÍ
+        // v: ë¯¸ì‚¬ìš© ê¼­ì§“ì  ì¤‘ d[v]ê°€ ìµœì†Œì¸ ê¼­ì§“ì 
+        // d: vì— ëŒ€í•œ í‚¤ê°’
         int v = que.top().second;
         long long d = que.top().first;
         que.pop();
 
-        // d > dist[v] ¤Ï¡¤(d, v) ¤¬¥´¥ß¤Ç¤¢¤ë¤³¤È¤ò°ÕÌ£¤¹¤ë
-        if (d > dist[v]) continue; 
+        // d > dist[v]ëŠ” (d, v)ê°€ ì“°ë ˆê¸°ë¼ëŠ” ê±¸ ì˜ë¯¸í•¨ --> ì™„í™” ìƒëµ
+        if (d > dist[v]) continue;
 
-        // ÄºÅÀ v ¤ò»ÏÅÀ¤È¤·¤¿³ÆÊÕ¤ò´ËÏÂ
+        // ê¼­ì§“ì  vë¥¼ ì‹œì‘ì ìœ¼ë¡œ í•˜ëŠ” ê° ë³€ì„ ì™„í™”
         for (auto e : G[v]) {
             if (chmin(dist[e.to], dist[v] + e.w)) {
-                // ¹¹¿·¤¬¤¢¤ë¤Ê¤é¥Ò¡¼¥×¤Ë¿·¤¿¤ËÁŞÆş
-                que.push(make_pair(dist[e.to], e.to)); 
+                // ê°±ì‹ ì´ ìˆìœ¼ë©´ í™ì— ìƒˆë¡­ê²Œ ì‚½ì…
+                que.push(make_pair(dist[e.to], e.to)); // ê¸°ì¡´ ê°’ì„ ë°”ê¾¸ì§€ ì•Šê³  ìƒˆ ê°’ì„ ì¶”ê°€í•´ë²„ë¦¼
+                // ìƒˆë¡œ ì‚½ì…í•´ë„ ë³µì¡ë„ì—ëŠ” í° ì˜í–¥ì´ ì—†ìŒ.
             }
         }
     }
-    
-    // ·ë²Ì½ĞÎÏ
+
+    // ê²°ê³¼ ì¶œë ¥
     for (int v = 0; v < N; ++v) {
         if (dist[v] < INF) cout << dist[v] << endl;
         else cout << "INF" << endl;
