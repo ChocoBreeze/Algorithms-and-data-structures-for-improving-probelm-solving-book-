@@ -1,21 +1,24 @@
+// Dijkstra - O(|V|^2)
+// ì´ë¯¸ ìµœë‹¨ ê²½ë¡œê°€ í™•ì •ëœ ê¼­ì§“ì  ì§‘í•© Së¥¼ ê´€ë¦¬í•¨ìœ¼ë¡œì¨ ìµœë‹¨ ê±°ë¦¬ ê°±ì‹ 
+// í˜„ì¬ ìµœë‹¨ ê±°ë¦¬ì´ê³  ì‚¬ìš©ë˜ì§€ ì•Šì€ vertexë¥¼ ëŒ€ìƒìœ¼ë¡œ ì™„í™”í•´ì„œ ìµœë‹¨ ê±°ë¦¬ ê°±ì‹ 
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// Ìµ¸ÂÂç¤òÉ½¤¹ÃÍ
-const long long INF = 1LL << 60; // ½½Ê¬Âç¤­¤ÊÃÍ¤òÍÑ¤¤¤ë (¤³¤³¤Ç¤Ï 2^60)
+// ë¬´í•œëŒ€ë¥¼ ëœ»í•˜ëŠ” ê°’
+const long long INF = 1LL << 60; // ì¶©ë¶„íˆ í° ê°’ì„ ì‚¬ìš©(ì—¬ê¸°ì„œëŠ” 2^60)
 
-// ÊÕ¤òÉ½¤¹·¿¡¤¤³¤³¤Ç¤Ï½Å¤ß¤òÉ½¤¹·¿¤ò long long ·¿¤È¤¹¤ë
+// ë³€ì„ ë‚˜íƒ€ë‚´ëŠ” ìë£Œí˜•. ì—¬ê¸°ì„œëŠ” ê°€ì¤‘ì¹˜ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìë£Œí˜•ìœ¼ë¡œ long long ì‚¬ìš©
 struct Edge {
-    int to; // ÎÙÀÜÄºÅÀÈÖ¹æ
-    long long w; // ½Å¤ß
+    int to; // ì¸ì ‘ ê¼­ì§“ì  ë²ˆí˜¸
+    long long w; // ê°€ì¤‘ì¹˜
     Edge(int to, long long w) : to(to), w(w) {}
 };
 
-// ½Å¤ßÉÕ¤­¥°¥é¥Õ¤òÉ½¤¹·¿
+// ê°€ì¤‘ ê·¸ë˜í”„ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìë£Œí˜•
 using Graph = vector<vector<Edge>>;
 
-// ´ËÏÂ¤ò¼Â»Ü¤¹¤ë´Ø¿ô
+// ì™„í™”ë¥¼ ì‹¤ì‹œí•˜ëŠ” í•¨ìˆ˜
 template<class T> bool chmin(T& a, T b) {
     if (a > b) {
         a = b;
@@ -25,11 +28,11 @@ template<class T> bool chmin(T& a, T b) {
 }
 
 int main() {
-    // ÄºÅÀ¿ô¡¤ÊÕ¿ô¡¤»ÏÅÀ
+    // ê¼­ì§“ì  ê°œìˆ˜, ë³€ ê°œìˆ˜, ì‹œì‘ì 
     int N, M, s;
     cin >> N >> M >> s;
 
-    // ¥°¥é¥Õ
+    // ê·¸ë˜í”„
     Graph G(N);
     for (int i = 0; i < M; ++i) {
         int a, b, w;
@@ -37,12 +40,12 @@ int main() {
         G[a].push_back(Edge(b, w));
     }
 
-    // ¥À¥¤¥¯¥¹¥È¥éË¡
-    vector<bool> used(N, false);
-    vector<long long> dist(N, INF);
+    // ë‹¤ìµìŠ¤íŠ¸ë¼ ì•Œê³ ë¦¬ì¦˜
+    vector<bool> used(N, false); // ì§‘í•© Sì— í¬í•¨ ì—¬ë¶€ íŒì •
+    vector<long long> dist(N, INF); // ì‹œì‘ì  sì—ì„œë¶€í„° ê° vertexê¹Œì§€ì˜ ê±°ë¦¬
     dist[s] = 0;
     for (int iter = 0; iter < N; ++iter) {
-        // ¡Ö»ÈÍÑºÑ¤ß¡×¤Ç¤Ê¤¤ÄºÅÀ¤Î¤¦¤Á¡¤dist ÃÍ¤¬ºÇ¾®¤ÎÄºÅÀ¤òÃµ¤¹
+        // ë¯¸ì‚¬ìš© ê¼­ì§“ì  ì¤‘ distê°’ì´ ìµœì†Œì¸ ê¼­ì§“ì  ì°¾ê¸°
         long long min_dist = INF;
         int min_v = -1;
         for (int v = 0; v < N; ++v) {
@@ -52,17 +55,17 @@ int main() {
             }
         }
 
-        // ¤â¤·¤½¤Î¤è¤¦¤ÊÄºÅÀ¤¬¸«¤Ä¤«¤é¤Ê¤±¤ì¤Ğ½ªÎ»¤¹¤ë
+        // ë§Œì•½ ê·¸ëŸ° ê¼­ì§“ì ì´ ì—†ë‹¤ë©´ ì¢…ë£Œ
         if (min_v == -1) break;
 
-        // min_v ¤ò»ÏÅÀ¤È¤·¤¿³ÆÊÕ¤ò´ËÏÂ¤¹¤ë
+        // min_vì„ ì‹œì‘ì ìœ¼ë¡œ ê° ë³€ì„ ì™„í™”
         for (auto e : G[min_v]) {
             chmin(dist[e.to], dist[min_v] + e.w);
         }
-        used[min_v] = true; // min_v ¤ò¡Ö»ÈÍÑºÑ¤ß¡×¤È¤¹¤ë
+        used[min_v] = true; // min_vë¥¼ ì‚¬ìš©ì´ ëë‚¬ë‹¤ê³  í‘œì‹œ
     }
 
-    // ·ë²Ì½ĞÎÏ
+    // ê²°ê³¼ ì¶œë ¥
     for (int v = 0; v < N; ++v) {
         if (dist[v] < INF) cout << dist[v] << endl;
         else cout << "INF" << endl;
