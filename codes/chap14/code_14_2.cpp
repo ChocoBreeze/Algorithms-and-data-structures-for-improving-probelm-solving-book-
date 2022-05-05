@@ -1,21 +1,36 @@
+// Bellman-Ford alg - O(|V||E|)
+// ê° ë³€ì— í•´ë‹¹í•˜ëŠ” ì™„í™” ì²˜ë¦¬ë¥¼ |V|ë²ˆ ë°˜ë³µ
+// |V|ë²ˆì§¸ ìž‘ì—…ì—ì„œ ê°±ì‹ ì´ ë°œìƒí•˜ëŠ” ê²½ìš° negative cycleì´ ì¡´ìž¬í•¨ì„ ì•Œ ìˆ˜ ìžˆìŒ.
+// negative cycleì´ ì—†ëŠ” ê²½ìš° |V|-1ë²ˆë§Œ ìˆ˜í–‰í•´ë„ ìµœë‹¨ ê²½ë¡œë¥¼ êµ¬í•  ìˆ˜ ìžˆìŒ.
+
+/*
+input ì˜ˆì‹œ
+N : ê·¸ëž˜í”„ ê¼­ì§“ì  ìˆ˜ / M : ë³€ì˜ ê°œìˆ˜ / s : ì‹œìž‘ì  ë²ˆí˜¸
+a0 -> b0 ê°€ì¤‘ì¹˜ = w0
+N M s 
+a0 b0 w0
+a1 b1 w1
+...
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// Ìµ¸ÂÂç¤òÉ½¤¹ÃÍ
-const long long INF = 1LL << 60; // ½½Ê¬Âç¤­¤ÊÃÍ¤òÍÑ¤¤¤ë (¤³¤³¤Ç¤Ï 2^60)
+// ë¬´í•œëŒ€ë¥¼ ëœ»í•˜ëŠ” ê°’
+const long long INF = 1LL << 60; // ì¶©ë¶„ížˆ í° ê°’ì„ ì‚¬ìš©(ì—¬ê¸°ì—ì„œëŠ” 2^60)
 
-// ÊÕ¤òÉ½¤¹·¿¡¤¤³¤³¤Ç¤Ï½Å¤ß¤òÉ½¤¹·¿¤ò long long ·¿¤È¤¹¤ë
+// ë³€ì˜ ìžë£Œí˜•. ê°€ì¤‘ì¹˜ëŠ” long longí˜•ì„ ì‚¬ìš©
 struct Edge {
-    int to; // ÎÙÀÜÄºÅÀÈÖ¹æ
-    long long w; // ½Å¤ß
+    int to; // ì¸ì ‘ ê¼­ì§“ì  ë²ˆí˜¸
+    long long w; // ê°€ì¤‘ì¹˜
     Edge(int to, long long w) : to(to), w(w) {}
 };
 
-// ½Å¤ßÉÕ¤­¥°¥é¥Õ¤òÉ½¤¹·¿
+// ê°€ì¤‘ ê·¸ëž˜í”„ ìžë£Œí˜•
 using Graph = vector<vector<Edge>>;
 
-// ´ËÏÂ¤ò¼Â»Ü¤¹¤ë´Ø¿ô
+// ì™„í™”ë¥¼ ì‹¤ì‹œí•˜ëŠ” í•¨ìˆ˜
 template<class T> bool chmin(T& a, T b) {
     if (a > b) {
         a = b;
@@ -25,11 +40,11 @@ template<class T> bool chmin(T& a, T b) {
 }
 
 int main() {
-    // ÄºÅÀ¿ô¡¤ÊÕ¿ô¡¤»ÏÅÀ
+    // ê¼­ì§“ì  ê°œìˆ˜, ë³€ ê°œìˆ˜, ì‹œìž‘ì 
     int N, M, s;
     cin >> N >> M >> s;
 
-    // ¥°¥é¥Õ
+    // ê·¸ëž˜í”„
     Graph G(N);
     for (int i = 0; i < M; ++i) {
         int a, b, w;
@@ -37,32 +52,32 @@ int main() {
         G[a].push_back(Edge(b, w));
     }
 
-    // ¥Ù¥ë¥Þ¥ó¡¦¥Õ¥©¡¼¥ÉË¡
-    bool exist_negative_cycle = false; // ÉéÊÄÏ©¤ò¤â¤Ä¤«¤É¤¦¤«
+    // ë²¨ë§Œ í¬ë“œ ì•Œê³ ë¦¬ì¦˜
+    bool exist_negative_cycle = false; // ìŒì˜ ë‹«ížŒ ê²½ë¡œê°€ ì¡´ìž¬í•˜ëŠ”ê°€
     vector<long long> dist(N, INF);
     dist[s] = 0;
     for (int iter = 0; iter < N; ++iter) {
-        bool update = false; // ¹¹¿·¤¬È¯À¸¤·¤¿¤«¤É¤¦¤«¤òÉ½¤¹¥Õ¥é¥°
+        bool update = false; // ê°±ì‹  ë°œìƒ ì—¬ë¶€ í”Œëž˜ê·¸ (ì‹œìž‘ì  sì—ì„œ ë„ë‹¬í•  ìˆ˜ ì—†ëŠ” ê¼­ì§“ì ìœ¼ë¡œ ì‹œìž‘í•˜ëŠ” ì™„í™”ëŠ” í•˜ì§€ ì•ŠìŒ)
         for (int v = 0; v < N; ++v) {
-            // dist[v] = INF ¤Î¤È¤­¤ÏÄºÅÀ v ¤«¤é¤Î´ËÏÂ¤ò¹Ô¤ï¤Ê¤¤
+            // dist[v] = INFì´ë¼ë©´ ê¼­ì§“ì  vì—ì„œì˜ ì™„í™”ë¥¼ í•˜ì§€ ì•ŠìŒ
             if (dist[v] == INF) continue;
-            
+
             for (auto e : G[v]) {
-                // ´ËÏÂ½èÍý¤ò¹Ô¤¤¡¤¹¹¿·¤µ¤ì¤¿¤é update ¤ò true ¤Ë¤¹¤ë
+                // ì™„í™” ì²˜ë¦¬ë¥¼ í•˜ê³  ê°±ì‹ ë˜ë©´ updateë¥¼ trueë¡œ
                 if (chmin(dist[e.to], dist[v] + e.w)) {
                     update = true;
                 }
             }
         }
 
-        // ¹¹¿·¤¬¹Ô¤ï¤ì¤Ê¤«¤Ã¤¿¤é¡¤¤¹¤Ç¤ËºÇÃ»Ï©¤¬µá¤á¤é¤ì¤Æ¤¤¤ë
+        // ê°±ì‹ ì´ ì—†ì—ˆë‹¤ë©´ ìµœë‹¨ ê²½ë¡œê°€ ì´ë¯¸ êµ¬í•´ì¡ŒìŒ
         if (!update) break;
 
-        // N ²óÌÜ¤ÎÈ¿Éü¤Ç¹¹¿·¤¬¹Ô¤ï¤ì¤¿¤Ê¤é¤Ð¡¤ÉéÊÄÏ©¤ò¤â¤Ä
+        // Në²ˆì§¸ ë°˜ë³µì—ì„œ ê°±ì‹ ë˜ì—ˆë‹¤ë©´ ìŒì˜ ë‹«ížŒ ê²½ë¡œê°€ ì¡´ìž¬í•¨
         if (iter == N - 1 && update) exist_negative_cycle = true;
     }
 
-    // ·ë²Ì½ÐÎÏ
+    // ê²°ê³¼ ì¶œë ¥
     if (exist_negative_cycle) cout << "NEGATIVE CYCLE" << endl;
     else {
         for (int v = 0; v < N; ++v) {
