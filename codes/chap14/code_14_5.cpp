@@ -1,19 +1,22 @@
+// Floyd - Warshall : (O(|V|^3))
+// dp는 세제곱 배열일 필요는 없음
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// ̵�����ɽ����
+// 무한대를 나타내는 값
 const long long INF = 1LL << 60;
 
 int main() {
-    // ĺ�������տ�
+    // 꼭짓점 개수, 변 개수
     int N, M;
     cin >> N >> M;
 
-    // dp ���� (INF �ǽ�������ޤ�)
+    // dp 배열(INF로 초기화)
     vector<vector<long long>> dp(N, vector<long long>(N, INF));
 
-    // dp ������
+    // dp 초기 조건
     for (int e = 0; e < M; ++e) {
         int a, b;
         long long w;
@@ -22,14 +25,14 @@ int main() {
     }
     for (int v = 0; v < N; ++v) dp[v][v] = 0;
 
-    // dp ���� (�ե����ɡ�������ˡ)
+    // dp 천이(플로이드 워셜 알고리즘) - 핵심
     for (int k = 0; k < N; ++k)
         for (int i = 0; i < N; ++i)
             for (int j = 0; j < N; ++j)
                 dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
 
-    // ��̽���
-    // �⤷ dp[v][v] < 0 �ʤ�����ϩ��¸�ߤ���
+    // 결과 출력
+    // 만약 dp[v][v] < 0라면 음의 닫힌 경로가 존재함
     bool exist_negative_cycle = false;
     for (int v = 0; v < N; ++v) {
         if (dp[v][v] < 0) exist_negative_cycle = true;
@@ -41,7 +44,7 @@ int main() {
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < N; ++j) {
                 if (j) cout << " ";
-                if (dp[i][j] < INF/2) cout << dp[i][j];
+                if (dp[i][j] < INF/2) cout << dp[i][j]; // 왜 INF/2보다 작은걸로 해놓은거지?
                 else cout << "INF";
             }
             cout << endl;
