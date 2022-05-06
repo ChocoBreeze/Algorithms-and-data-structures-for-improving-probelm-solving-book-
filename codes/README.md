@@ -1,9 +1,9 @@
 # 2 章　計算量とオーダー記法(계산량과 오더 기법)
 
-- [code 2.1：一重の for 文 (O(N))(홑겹 for문)](https://github.com/drken1215/book_algorithm_solution/blob/master/codes/chap02/code_2_1.cpp)
-- [code 2.2：二重の for 文 (O(N^2))(이중 for문)](https://github.com/drken1215/book_algorithm_solution/blob/master/codes/chap02/code_2_2.cpp)
-- [code 2.3：偶数の列挙(짝수 열거)](https://github.com/drken1215/book_algorithm_solution/blob/master/codes/chap02/code_2_3.cpp)
-- [code 2.4：最近点対問題に対する全探索(두 점 사이의 최소 거리 구하기 문제에 대한 전체 탐색)](https://github.com/drken1215/book_algorithm_solution/blob/master/codes/chap02/code_2_4.cpp)
+- [code 2.1：一重の for 文 (O(N))(단일 for문)](https://github.com/ChocoBreeze/Algorithms-and-data-structures-for-improving-probelm-solving-book-/blob/master/codes/chap02/code_2_1.cpp)
+- [code 2.2：二重の for 文 (O(N^2))(이중 for문)](https://github.com/ChocoBreeze/Algorithms-and-data-structures-for-improving-probelm-solving-book-/blob/master/codes/chap02/code_2_2.cpp)
+- [code 2.3：偶数の列挙(짝수 열거)](https://github.com/ChocoBreeze/Algorithms-and-data-structures-for-improving-probelm-solving-book-/blob/master/codes/chap02/code_2_3.cpp)
+- [code 2.4：最近点対問題に対する全探索(두 점 사이의 최소 거리 구하기 문제에 대한 전체 탐색)](https://github.com/ChocoBreeze/Algorithms-and-data-structures-for-improving-probelm-solving-book-/blob/master/codes/chap02/code_2_4.cpp)
 
 
 
