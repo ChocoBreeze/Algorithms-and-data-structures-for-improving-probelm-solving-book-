@@ -10,7 +10,7 @@
 경로(walk) / 닫힌 경로(cycle) / 길(path)
 
 10.1.3절)
-s-t walk : 두 vertex s, t에 대해 s에서 t를 향해 인접하는 vertex들을 따라가다 도달할 수 있다면 그 경롤 s-t walk, s-t path라 함.
+s-t walk : 두 vertex s, t에 대해 s에서 t를 향해 인접하는 vertex들을 따라가다 도달할 수 있다면 그 경 s-t walk, s-t path라 함.
 cycle : walk 중에서 시작점과 종점이 같은 것(=closed path)
 path : walk 중에서 특히 같은 꼭짓점을 두 번 이상 통과하지 않는 것
 
