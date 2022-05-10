@@ -25,7 +25,7 @@ int main() {
     }
     for (int v = 0; v < N; ++v) dp[v][v] = 0;
 
-    // dp 천이(플로이드 워셜 알고리즘) - 핵심
+    // dp 전이(플로이드 워셜 알고리즘) - 핵심
     for (int k = 0; k < N; ++k)
         for (int i = 0; i < N; ++i)
             for (int j = 0; j < N; ++j)
