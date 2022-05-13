@@ -102,7 +102,7 @@
 
 　
 
-# 10 章　データ構造(3)：グラフと木(데이터 구조(3) : 그래프와 나무)
+# 10 章　データ構造(3)：グラフと木(데이터 구조(3) : 그래프와 트리)
 
 - [Abstract](https://github.com/ChocoBreeze/Algorithms-and-data-structures-for-improving-probelm-solving-book-/blob/master/codes/chap10/Abstract)
 - [code 10.3：グラフを入力として受け取る(그래프 입력으로 받기)](https://github.com/ChocoBreeze/Algorithms-and-data-structures-for-improving-probelm-solving-book-/blob/master/codes/chap10/code_10_3.cpp) 
