@@ -46,5 +46,24 @@ stable set problem과 Hamilton Cycle problem도 NP Complete임.
 5. 다항식 시간 환원 예
 해결 불가능해 보이는 판정 문제 X에 대해 어떤 NP complete 문제 Y에서 다항 시간 문제로 환원하는 몇 가지 예.
 1) 꼭짓점 커버 문제.
+  안정 집합 문제가 NP Complete 임을 이용함.
+2) 부분합 문제(*) (정수 N 개중 몇 개를 골라 그 합이 W가 될 수 있는지 판단하기)
+  꼭짓점 커버 문제가 NP Complete 임을 이용함.
+  psuedo-polynomial algorithm(의사 다항식 알고리즘) : 실제는 지수 시간이지만 입력 수치 크기에 따라 다항식 시간으로 실행할 수 있는 알고리즘.
+  
+6. NP Hard
+최적화 문제나 셈하기 문제 등의 판정 문제가 아닌 일반 문제에 대해서도 어려움을 논의하고 싶기 마련.
+NP Hard : 문제 X에 대해 어떤 NP 완전 문제 Y가 존재하고, X를 다항식 시간으로 푸는 알고리즘으로 Y도 다항식 시간으로 풀릴 때 X는 NP Hard 문제라고 한다.
+즉, NP Hard(난해) 문제는 판정 문제에 한정하지 않은, NP Complete 문제와 동등하거나 그 이상으로 어려운 문제를 말함.
+대다수의 NP Hard 문제는 대응하는 NP Complete 문제를 자연스럽게 포함함.
+Ex) 최대 stable set problem, 최소 꼭짓점 커버 문제, Traveling Salesman problem(TSP)
 
+7. Halting Problem
+판정 문제 중에는 처음부터 NP에 속하지 않는 문제도 있으며, 예를 들어 Halting Problem이 존재함.
+이는 NP에는 속하지 않지만 NP Hard 문제임.(풀 수 있다고 가정 후 모순을 통해 풀 수 없는 문제임을 증명 가능함)
+- SAT와 연관지어 생각.
+
+8. 정리
+해결 불가능한 어려운 문제 X와 마주하면, 알려진 NP Hard 문제 Y 중 하나를 가져와 Y를 X로 환원할 수 없을지 생각해 보이기.
+이후 접근 방법 모색.
 
